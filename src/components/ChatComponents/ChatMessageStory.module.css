@@ -1,0 +1,199 @@
+/* ===== LINHA ===== */
+.igMessage {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+/* Quando tem reação, aumentar margin-bottom */
+.igMessage:has(.igMessageReaction) {
+  margin-bottom: 20px;
+}
+
+/* ===== RECEBIDA ===== */
+.igMessageOther {
+  justify-content: flex-start;
+}
+
+/* ===== ENVIADA ===== */
+.igMessageMe {
+  justify-content: flex-end;
+}
+
+/* ===== AVATAR ===== */
+.igMessageAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+  filter: blur(5px) !important;
+  -webkit-filter: blur(5px) !important;
+  transform: scale(1.05);
+  opacity: 0.85;
+  -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+  mask-image: radial-gradient(circle, white 100%, black 100%);
+}
+
+/* Avatar invisível (mas mantém o espaço) */
+.igMessageAvatarHidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* ===== CONTAINER DA BOLHA ===== */
+.igMessageBubbleContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== CONTAINER DO STORY ===== */
+.storyContainer {
+  position: relative;
+  background-color: rgb(31, 41, 55);
+  border-radius: 12px;
+  overflow: hidden;
+  width: 157px;
+  border: 1px solid rgb(28, 30, 33);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.storyContainer:hover {
+  transform: scale(1.02);
+}
+
+/* ===== HEADER DO STORY ===== */
+.storyHeader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+  z-index: 1;
+}
+
+.storyAvatar {
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.storyInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.storyName {
+  font-size: 12.04px;
+  font-weight: 500;
+  color: #f9f9f9;
+}
+
+/* ===== IMAGEM DO STORY ===== */
+.storyImage {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 157 / 259;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== BOTÃO DE PLAY ===== */
+.playButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 86.25px;
+  height: 86.25px;
+  background-color: transparent;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.2s;
+}
+
+.playButton:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.playButton svg {
+  width: 32.5px;
+  height: 32.5px;
+  margin-left: 2px;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+}
+
+.playButton svg path {
+  paint-order: stroke fill;
+}
+
+/* ===== ÍCONE DE CLIP ===== */
+.clipIcon {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clipIcon svg {
+  color: #f9f9f9;
+  width: 24px;
+  height: 24px;
+}
+
+/* ===== REAÇÃO ===== */
+.igMessageReaction {
+  position: absolute;
+  bottom: -20px;
+  left: 4px;
+  background-color: rgb(25, 27, 30);
+  border: 2px solid rgb(11, 16, 20);
+  border-radius: 14px;
+  padding: 2.7px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 2;
+}
+
+.igMessageReaction:hover {
+  transform: scale(1.1);
+}
+
+/* Reação em mensagem recebida */
+.igMessageOther .igMessageReaction {
+  right: auto;
+  left: -4px;
+}
+
+/* Reação em mensagem enviada */
+.igMessageMe .igMessageReaction {
+  right: -4px;
+  left: auto;
+}
+
+/* Espaçamento maior entre stories consecutivos */
+.igMessage:has(.storyContainer) + .igMessage:has(.storyContainer) {
+  margin-top: 10px;
+}
