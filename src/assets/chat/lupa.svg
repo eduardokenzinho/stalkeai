@@ -1,0 +1,6 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Círculo da lupa (lente) - centralizado -->
+                            <circle cx="17.5" cy="17.5" r="6.5" stroke="#F9F9F9" stroke-width="3px" fill="none"></circle>
+                            <!-- Cabo da lupa (diagonal saindo do círculo) - 10% maior -->
+                            <line x1="23.5" y1="23.5" x2="26.25" y2="26.25" stroke="#F9F9F9" stroke-width="3px" stroke-linecap="round" fill="none"></line>
+                        </svg>
