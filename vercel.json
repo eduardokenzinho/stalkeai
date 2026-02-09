@@ -1,0 +1,10 @@
+{
+  "framework": "create-react-app",
+  "buildCommand": "CI=false NODE_OPTIONS=--max-old-space-size=4096 react-scripts build",
+  "outputDirectory": "build",
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
+  ]
+}
