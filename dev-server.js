@@ -26,7 +26,8 @@ app.get('/api/get-instagram-puppeteer', (req, res) => {
 });
 console.log('✓ Rota /api/get-instagram-puppeteer registrada');
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Dev API server listening on http://localhost:${port}`);
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server listening on port ${port}`);
 });
+
