@@ -1,0 +1,10 @@
+/* Chat1.module.css */
+.chatPageChat1 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: rgb(11, 16, 20);
+  overflow: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
