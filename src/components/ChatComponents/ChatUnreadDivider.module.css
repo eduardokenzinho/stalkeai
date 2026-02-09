@@ -1,0 +1,28 @@
+.unreadDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px 0;
+  padding: 0 10px;
+}
+
+.unreadLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(156, 163, 175, 0) 0%,
+    rgba(156, 163, 175, 0.5) 50%,
+    rgba(156, 163, 175, 0) 100%
+  );
+}
+
+.unreadText {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgb(156, 163, 175);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
