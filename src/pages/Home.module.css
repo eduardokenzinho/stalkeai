@@ -1,0 +1,48 @@
+/* Home.module.css - Estilos específicos para Home.jsx */
+
+.homePage {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Canvas Matrix Background */
+.matrixCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.525;
+}
+
+/* Stats da Home */
+.homeStatsContainer {
+  text-align: center;
+  margin-top: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in, visibility 0.5s ease-in;
+}
+
+.homeStatsContainer.homeVisible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.homeStatsText {
+  font-size: 14px;
+  color: #9ca3af;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.homeStatsNumber {
+  background: linear-gradient(135deg, #4a37b6, #ab58f4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
