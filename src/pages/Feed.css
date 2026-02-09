@@ -1,0 +1,10 @@
+.feed-page {
+  background: rgb(0, 0, 0);
+  color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.feed-content {
+  padding-top: 50px;
+  padding-bottom: 120px; /* BottomNav (56px) + TrialBanner (~74px) */
+}
