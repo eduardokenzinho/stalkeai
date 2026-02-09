@@ -1,0 +1,100 @@
+/* ===== MENSAGEM ===== */
+.message {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  margin: 2px 0px 4px 0px;
+  justify-content: flex-end;
+}
+
+/* ===== BOLHA ===== */
+.bubble {
+  position: relative;
+}
+
+/* ===== ÁUDIO ENVIADO ===== */
+.audioRecebido {
+  background-color: rgb(134, 65, 237);
+  border-radius: 18px;
+  padding: 12px 17px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0px;
+  width: 281px;
+  min-width: 281px;
+  max-width: 281px;
+}
+
+/* ===== BOTÃO PLAY ===== */
+.audioRecebidoPlayBtn {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.audioRecebidoPlayBtn:hover {
+  opacity: 0.8;
+}
+
+.audioRecebidoPlayBtn i {
+  color: #f9f9f9;
+  font-size: 16px;
+  margin-left: 2px;
+}
+
+/* ===== WAVEFORM ===== */
+.audioRecebidoWaveform {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0px;
+  flex: 1;
+  height: 37px;
+  min-height: 37px;
+  margin: 0 8px 0 10px;
+}
+
+.audioRecebidoWaveformBar {
+  width: 3px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 1.5px;
+  flex-shrink: 0;
+}
+
+/* ===== DURAÇÃO ===== */
+.audioRecebidoDuration {
+  font-size: 10.8px;
+  color: #f9f9f9;
+  font-weight: 400;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ===== TRANSCRIÇÃO ===== */
+.audioRecebidoTranscricao {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  margin-top: 10px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.audioRecebidoTranscricao:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
