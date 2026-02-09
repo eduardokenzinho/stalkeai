@@ -1,0 +1,728 @@
+/* Instagram Login - TEMA PRETO (Mobile-first) */
+.instagramLoginScreen {
+  position: fixed;
+  inset: 0;
+  background: #000000;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  padding-top: max(16px, env(safe-area-inset-top));
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  overflow-y: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-overflow-scrolling: touch;
+}
+
+.instagramContainer {
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Card Principal */
+.instagramCard {
+  background: #000000;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  padding: 30px 20px 24px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Logo Instagram */
+.instagramLogo {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.instaLogoImg {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+/* Formulário */
+.instagramForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Grupos de Input */
+.formGroup {
+  position: relative;
+  margin: 0;
+  width: 100%;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Inputs */
+.formInput {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  background: #121212;
+  font-size: 16px;
+  color: #ffffff;
+  height: 44px;
+  outline: none;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.formInput:focus {
+  border-color: #555555;
+  background: #121212;
+}
+
+.formInput::placeholder {
+  color: #8e8e8e;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.formInput[readonly] {
+  background: #0a0a0a;
+  color: #e0e0e0;
+  cursor: default;
+}
+
+.passwordInput {
+  font-family: monospace !important;
+  letter-spacing: 2px;
+  color: #ffffff;
+  padding-right: 65px;
+  font-size: 16px;
+}
+
+.passwordInput.success {
+  color: #00ff88;
+  background: #0a0a0a;
+  border-color: #00ff88;
+}
+
+/* Botão Mostrar/Ocultar */
+.showPasswordBtn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #333;
+  color: #8e8e8e;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  z-index: 2;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.showPasswordBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #555;
+}
+
+/* Mensagem de erro */
+.errorMessage {
+  color: #ed4956;
+  font-size: 13px;
+  line-height: 16px;
+  margin: 6px 0 0 0;
+  text-align: center;
+  animation: fadeIn 0.2s ease;
+  font-weight: 400;
+}
+
+/* Aviso de Criptografia SIMPLIFICADO */
+.cryptoWarning {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #8e8e8e;
+  margin: 4px 0 2px;
+  animation: pulseFade 1.5s infinite;
+}
+
+@keyframes pulseFade {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.warningIcon {
+  width: 14px;
+  height: 14px;
+  color: #8e8e8e;
+  stroke-width: 2;
+}
+
+/* Notificação de Sucesso */
+.successNotification {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 6px;
+  font-size: 13px;
+  color: #00ff88;
+  margin: 8px 0 4px;
+  animation: slideIn 0.3s ease;
+}
+
+.successIcon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.5;
+}
+
+/* Botão Entrar */
+.loginBtn {
+  width: 100%;
+  padding: 12px;
+  margin: 6px 0;
+  background: #0095f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  height: 44px;
+  opacity: 0.7;
+  transition: all 0.2s;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.loginBtn.active {
+  opacity: 1;
+  background: #0095f6;
+}
+
+.loginBtn.active:hover {
+  background: #0074cc;
+  transform: scale(1.01);
+}
+
+.loginBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* Separador OU */
+.separator {
+  display: flex;
+  align-items: center;
+  margin: 14px 0;
+  color: #8e8e8e;
+  width: 100%;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: #3a3a3a;
+}
+
+.or {
+  padding: 0 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #8e8e8e;
+  text-transform: uppercase;
+}
+
+/* Facebook Login */
+.facebookLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 6px 0;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 10px 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.facebookLogin:hover {
+  background: rgba(56, 81, 133, 0.1);
+}
+
+.fbIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.fbText {
+  font-size: 14px;
+  font-weight: 600;
+  color: #385185;
+}
+
+/* Esqueceu a senha */
+.forgotPassword {
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
+.forgotLink {
+  font-size: 12.5px;
+  color: #8e8e8e;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.forgotLink:hover {
+  text-decoration: underline;
+}
+
+/* Card de cadastro */
+.signupCard {
+  background: #000000;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.signupText {
+  font-size: 14px;
+  color: #a8a8a8;
+  margin: 0;
+  font-weight: 400;
+}
+
+.signupLink {
+  color: #0095f6;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.signupLink:hover {
+  text-decoration: underline;
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Desktop */
+@media (min-width: 420px) {
+  .instagramCard {
+    padding: 40px 40px 30px;
+  }
+
+  .instaLogoImg {
+    height: 60px;
+  }
+
+  .instagramLogo {
+    margin-bottom: 30px;
+  }
+
+  .cryptoIcon,
+  .successIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .cryptoSpinner,
+  .successCheck {
+    width: 18px;
+    height: 18px;
+  }
+
+  .cryptoMain,
+  .successMain {
+    font-size: 14px;
+  }
+
+  .cryptoSub,
+  .successSub {
+    font-size: 12px;
+  }
+
+  .cryptoHeader,
+  .successHeader {
+    gap: 14px;
+  }
+}
+
+/* Telas muito pequenas (iPhone SE, Galaxy S5) */
+@media (max-width: 359px) {
+  .instagramLoginScreen {
+    padding: 12px;
+  }
+
+  .instagramCard {
+    padding: 24px 16px 20px;
+    border-radius: 10px;
+  }
+
+  .instaLogoImg {
+    height: 42px;
+  }
+
+  .instagramLogo {
+    margin-bottom: 20px;
+  }
+
+  .formInput {
+    height: 40px;
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+
+  .passwordInput {
+    padding-right: 58px;
+  }
+
+  .loginBtn {
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .cryptoBreaking,
+  .successBreaking {
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+  }
+
+  .cryptoIcon,
+  .successIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .cryptoSpinner,
+  .successCheck {
+    width: 14px;
+    height: 14px;
+  }
+
+  .cryptoMain,
+  .successMain {
+    font-size: 12px;
+  }
+
+  .cryptoSub,
+  .successSub {
+    font-size: 10px;
+  }
+
+  .signupCard {
+    padding: 16px;
+  }
+
+  .signupText {
+    font-size: 13px;
+  }
+
+  .separator {
+    margin: 10px 0;
+  }
+
+  .fbIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .fbText {
+    font-size: 13px;
+  }
+}
+
+/* Scrollbar personalizada */
+.instagramLoginScreen::-webkit-scrollbar {
+  width: 8px;
+}
+
+.instagramLoginScreen::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+.instagramLoginScreen::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+}
+
+.instagramLoginScreen::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}
+
+/* Quebrando Criptografia */
+.cryptoBreaking {
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  padding: 14px;
+  margin: 10px 0;
+  background: rgba(12, 16, 17, 0.8);
+  backdrop-filter: blur(10px);
+  animation: fadeInUp 0.3s ease;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cryptoHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  min-width: 0;
+}
+
+.cryptoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4a37b6, #ab58f4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cryptoSpinner {
+  width: 16px;
+  height: 16px;
+  color: white;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.cryptoText {
+  flex: 1;
+  text-align: left;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.cryptoMain {
+  font-size: 13px;
+  font-weight: 500;
+  color: #e0e0e0;
+  margin: 0 0 3px 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cryptoSub {
+  font-size: 11px;
+  color: #8e8e8e;
+  margin: 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Barra de progresso */
+.progressContainer {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 10px 0 8px;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, #4a37b6, #ab58f4);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progressBar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Contador de tentativas */
+.attemptsCounter {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.attemptsText {
+  font-size: 11px;
+  color: #8e8e8e;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+/* Sucesso */
+.successBreaking {
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  border-radius: 10px;
+  padding: 14px;
+  margin: 10px 0;
+  background: rgba(0, 255, 136, 0.05);
+  backdrop-filter: blur(10px);
+  animation: successPop 0.4s ease;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+@keyframes successPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  70% {
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.successHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.successIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.successCheck {
+  width: 16px;
+  height: 16px;
+  color: white;
+  stroke-width: 3;
+}
+
+.successText {
+  flex: 1;
+  text-align: left;
+  min-width: 0;
+}
+
+.successMain {
+  font-size: 13px;
+  font-weight: 500;
+  color: #10b981;
+  margin: 0 0 3px 0;
+  line-height: 1.3;
+}
+
+.successSub {
+  font-size: 11px;
+  color: #8e8e8e;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Ajustes para botão quando sucesso */
+.loginBtn.active {
+  background: linear-gradient(135deg, #4a37b6, #ab58f4);
+  box-shadow: 0 4px 15px rgba(74, 55, 182, 0.4);
+  opacity: 1;
+}
+
+.loginBtn.active:hover {
+  background: linear-gradient(135deg, #3a2b96, #8b48d4);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(74, 55, 182, 0.5);
+}
+
+/* Animações adicionais */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
