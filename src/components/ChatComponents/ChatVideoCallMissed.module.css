@@ -1,0 +1,83 @@
+/* ===== MENSAGEM DO SISTEMA (PERDIDA) ===== */
+.messageSystem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8.8px;
+  padding: 12px 16px;
+  background-color: rgb(28, 30, 33);
+  border-radius: 18px;
+  color: #f9f9f9;
+  font-size: 14px;
+  margin: 9px 0 2px 32px;
+  max-width: 240px;
+  width: 100%;
+  align-self: flex-start;
+}
+
+/* ===== CONTENT ===== */
+.messageSystemContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.messageSystemContent span {
+  font-size: 12.6px;
+  font-weight: 600;
+  color: rgb(220, 220, 220);
+}
+
+/* ===== ÍCONE VERMELHO ===== */
+.messageSystem i {
+  font-size: 16px;
+  color: #f9f9f9;
+  background-color: #ff4444;
+  border-radius: 50%;
+  width: 33px;
+  height: 33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  align-self: center;
+}
+
+/* X VERMELHO SOBRE O ÍCONE */
+.messageSystem i::after {
+  content: '×';
+  position: absolute;
+  font-size: 10px;
+  font-weight: 900;
+  color: #ff4444;
+  line-height: 1;
+  top: 50%;
+  left: 42%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* ===== BOTÃO "LIGAR DE VOLTA" ===== */
+.messageSystemBtn {
+  padding: 9.6px 16px;
+  background-color: rgb(34, 36, 40);
+  color: rgb(220, 220, 220);
+  border: none;
+  border-radius: 8px;
+  font-size: 12.6px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.messageSystemBtn:hover {
+  background-color: rgb(44, 46, 50);
+}
+
+.messageSystemBtn:active {
+  transform: scale(0.98);
+}
