@@ -1,0 +1,86 @@
+/* CONTAINER PRINCIPAL */
+.directHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: #0B1014;
+  border-bottom: 1px solid rgb(31, 41, 55);
+}
+
+/* WRAPPER INTERNO (equivale ao flex items-center justify-between px-4 py-3) */
+.directHeaderInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  height: 50px;
+  box-sizing: border-box;
+}
+
+/* ===== ESQUERDA ===== */
+
+.directLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* BOTÃO VOLTAR */
+.directBack {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.directBack svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* USERNAME */
+.directUsername {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  line-height: 1;
+  color: #F9F9F9;
+}
+
+/* ===== DIREITA ===== */
+
+.directRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ÍCONES DIREITA */
+.directRight svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+  cursor: pointer;
+}
+
+/* GARANTE QUE NÃO TENHA CLICK AREA TORTA */
+.directRight svg,
+.directBack svg {
+  flex-shrink: 0;
+}
+
+/* REMOVE QUALQUER SELEÇÃO */
+.directHeader button,
+.directHeader svg {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
