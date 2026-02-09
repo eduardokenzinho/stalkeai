@@ -1,0 +1,189 @@
+/* ===== CONTAINER DA MENSAGEM ===== */
+
+.message {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-bottom: 2px;
+  position: relative;
+  overflow: visible;
+  margin: 4px 0px 8px 0px;
+}
+
+/* Quando tem reação, aumentar margin-bottom */
+.message.hasReaction {
+  margin-bottom: 20px;
+}
+
+/* ===== AVATAR ===== */
+
+.avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+  filter: blur(5px) !important;
+  -webkit-filter: blur(5px) !important;
+  transform: scale(1.05);
+  opacity: 0.85;
+  -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+  mask-image: radial-gradient(circle, white 100%, black 100%);
+}
+
+.avatarHidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* ===== BOLHA ===== */
+
+.bubble {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  overflow: visible;
+}
+
+/* ===== CONTAINER DO ÁUDIO ===== */
+
+.audioRecebido {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0px;
+  padding: 12px 17px;
+  padding-bottom: 12px;
+  background-color: rgb(28, 30, 33);
+  border-radius: 18px;
+  width: 281px;
+  min-width: 281px;
+  max-width: 281px;
+  position: relative;
+}
+
+/* ===== BOTÃO PLAY/PAUSE ===== */
+
+.playBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.playBtn i {
+  color: rgb(142, 52, 242);
+  font-size: 17px;
+  margin-left: -13px;
+  transition: color 0.3s ease;
+}
+
+.playBtn:hover i {
+  color: rgb(111, 60, 249);
+}
+
+.playBtn.listened i {
+  color: #f9f9f9;
+}
+
+.playBtn.listened:hover i {
+  color: rgba(249, 249, 249, 0.8);
+}
+
+/* ===== WAVEFORM ===== */
+
+.waveform {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0px;
+  height: 37px;
+  margin-right: 8px;
+  min-height: 37px;
+}
+
+.waveBar {
+  width: 3px;
+  background-color: #f9f9f9;
+  border-radius: 1.5px;
+  transition: background-color 0.3s ease;
+  min-height: 4px;
+  display: block;
+}
+
+/* Estado tocando: cinza (sem active) */
+.waveBar.playing:not(.active) {
+  background-color: rgb(103, 103, 103) !important;
+}
+
+/* Estado ativo: branco (com ou sem playing) */
+.waveBar.active {
+  background-color: #f9f9f9 !important;
+}
+
+/* Estado tocando E ativo: branco (prioridade máxima) */
+.waveBar.playing.active {
+  background-color: #f9f9f9 !important;
+}
+
+/* ===== DURAÇÃO ===== */
+
+.duration {
+  font-size: 10.8px;
+  color: #f9f9f9;
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+/* ===== TRANSCRIÇÃO ===== */
+
+.transcricao {
+  font-size: 11px;
+  color: rgba(156, 163, 175, 0.5);
+  width: 100%;
+  margin-top: 10px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 1.2;
+}
+
+.transcricao:hover {
+  color: rgba(156, 163, 175, 0.7);
+}
+
+/* ===== REAÇÃO ===== */
+
+.reaction {
+  position: absolute;
+  bottom: -20px;
+  left: -4px;
+  background-color: rgb(25, 27, 30);
+  border: 2px solid rgb(11, 16, 20);
+  border-radius: 14px;
+  padding: 2.7px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 2;
+}
+
+.reaction:hover {
+  transform: scale(1.1);
+}
