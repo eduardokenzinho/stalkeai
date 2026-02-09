@@ -1,0 +1,208 @@
+/* ChatMessage.module.css - Estilos compartilhados para mensagens */
+
+/* ===== LINHA ===== */
+.igMessage {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  margin: 3px 0px 3px;
+}
+
+/* Quando tem reação, aumentar margin-bottom */
+.igMessage:has(.igMessageReaction) {
+  margin-bottom: 20px;
+}
+
+/* ===== RECEBIDA ===== */
+.igMessageOther {
+  justify-content: flex-start;
+}
+
+/* ===== ENVIADA ===== */
+.igMessageMe {
+  justify-content: flex-end;
+}
+
+/* ===== AVATAR ===== */
+.igMessageAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+  filter: blur(5px) !important;
+  -webkit-filter: blur(5px) !important;
+  transform: scale(1.05);
+  opacity: 0.85;
+  -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+  mask-image: radial-gradient(circle, white 100%, black 100%);
+}
+
+/* Avatar invisível (mas mantém o espaço) */
+.igMessageAvatarHidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* ===== CONTAINER DA BOLHA (para posicionar reação E reply) ===== */
+.igMessageBubbleContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 65%;
+}
+
+/* ===== BOLHA ===== */
+.igMessageBubble {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 20px;
+  font-size: 15.5px;
+  line-height: 21px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* ===== BOLHA RECEBIDA ===== */
+.igMessageBubbleOther {
+  background: rgb(28, 30, 33);
+  color: #f9f9f9;
+}
+
+/* ===== BOLHA ENVIADA ===== */
+.igMessageBubbleMe {
+  background: #8f3ce8;
+  color: #ffffff;
+}
+
+/* ===== BLUR DE PALAVRAS ===== */
+.blurWord {
+  filter: blur(4px);
+  background: rgba(255, 255, 255, 0.187);
+  padding: 2px 4px;
+  border-radius: 4px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ===== REAÇÃO ===== */
+.igMessageReaction {
+  position: absolute;
+  bottom: -20px;
+  left: 4px;
+  background-color: rgb(25, 27, 30);
+  border: 2px solid rgb(11, 16, 20);
+  border-radius: 14px;
+  padding: 2.7px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.igMessageReaction:hover {
+  transform: scale(1.1);
+}
+
+/* Reação em mensagem recebida */
+.igMessageOther .igMessageReaction {
+  right: auto;
+  left: -4px;
+}
+
+/* Reação em mensagem enviada */
+.igMessageMe .igMessageReaction {
+  right: -4px;
+  left: auto;
+}
+
+/* ===== RESPOSTA (REPLY) - FORA DA BOLHA ===== */
+.igMessageReply {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6px;
+}
+
+/* Reply em mensagem RECEBIDA */
+.igMessageOther .igMessageReply {
+  align-items: flex-start;
+}
+
+.igMessageOther .replyLabel {
+  font-size: 12px;
+  color: rgb(180, 180, 180);
+  margin-bottom: 6px;
+  padding-left: 11px;
+}
+
+.igMessageOther .replyContentWrapper {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.igMessageOther .replyLine {
+  width: 3px;
+  background-color: #545455;
+  border-radius: 2px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.igMessageOther .replyContent {
+  border-radius: 18px;
+  background: rgba(134, 65, 237, 0.6);
+  font-size: 12.75px;
+  color: rgb(240, 240, 240);
+  padding: 6px 10px;
+  line-height: 16px;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Reply em mensagem ENVIADA */
+.igMessageMe .igMessageReply {
+  align-items: flex-end;
+}
+
+.igMessageMe .replyLabel {
+  font-size: 12px;
+  color: rgba(249, 249, 249, 0.7);
+  margin-bottom: 6px;
+  padding-right: 11px;
+}
+
+.igMessageMe .replyContentWrapper {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  flex-direction: row-reverse;
+}
+
+.igMessageMe .replyLine {
+  width: 3px;
+  background-color: #545455;
+  border-radius: 2px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.igMessageMe .replyContent {
+  border-radius: 18px;
+  background: rgba(249, 249, 249, 0.15);
+  font-size: 12.75px;
+  color: rgba(249, 249, 249, 0.9);
+  padding: 6px 10px;
+  line-height: 16px;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
