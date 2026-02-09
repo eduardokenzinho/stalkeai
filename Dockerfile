@@ -1,7 +1,7 @@
 FROM node:20-bullseye-slim AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm install --legacy-peer-deps
 COPY . .
 RUN npm run build
 
@@ -39,7 +39,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm install --omit=dev --legacy-peer-deps
 
 COPY --from=build /app/build ./build
 COPY --from=build /app/api ./api
