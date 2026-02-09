@@ -1,0 +1,99 @@
+.storiesWrapper {
+  padding: 10px 14px;
+  overflow-x: auto;
+}
+
+.storiesWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.storiesContainer {
+  display: flex;
+  gap: 8px;
+}
+
+/* ITEM */
+.storyItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* BOTÃO */
+.storyButton {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* ANEL */
+.storyRing {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  position: relative;
+}
+
+.storyRing.locked {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.storyRing.self {
+  background: rgb(31, 41, 55);
+}
+
+/* AVATAR */
+.storyAvatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgb(11, 16, 20);
+  padding: 2px;
+}
+
+.storyAvatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+/* BLUR PARA BLOQUEADO */
+.storyRing.locked img {
+  filter: blur(5px);
+}
+
+/* BOTÃO + */
+.addStory {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #f9f9f9;
+  border: 2.4px solid rgb(31, 41, 55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addStory span {
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(31, 41, 55);
+}
+
+/* USERNAME */
+.storyUsername {
+  font-size: 12px;
+  color: rgb(209, 213, 219);
+  max-width: 66px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
