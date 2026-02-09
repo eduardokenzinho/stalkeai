@@ -1,0 +1,19 @@
+/* ===== ENVIADA ===== */
+.ig-message-me {
+  justify-content: flex-end;
+}
+
+/* ===== BOLHA ENVIADA ===== */
+.ig-message-bubble-me {
+  display: inline-block;
+  max-width: 65%;
+  background: #8f3ce8;
+  border: 1px solid red;
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 20px;
+  font-size: 15.5px;
+  line-height: 21px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
