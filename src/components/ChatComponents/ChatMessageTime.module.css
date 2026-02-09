@@ -1,0 +1,11 @@
+/* ChatMessageTime.module.css */
+
+.messageTime {
+  text-align: center;
+  color: rgb(156, 163, 175);
+  font-size: 10px;
+  font-weight: 300;
+  margin: 16px 0;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
