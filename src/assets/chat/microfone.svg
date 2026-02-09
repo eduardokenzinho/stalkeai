@@ -1,0 +1,7 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" aria-label="Clipe de voz" class="input-icon-img" fill="currentColor" height="22" role="img" viewBox="0 0 24 24" width="22">
+                                <title fill="#F9F9F9">Clipe de voz</title>
+                                <path d="M19.5 10.671v.897a7.5 7.5 0 0 1-15 0v-.897" fill="none" stroke="#F9F9F9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px"></path>
+                                <line fill="none" stroke="#F9F9F9" stroke-linejoin="round" stroke-width="2px" x1="12" x2="12" y1="19.068" y2="22"></line>
+                                <line fill="none" stroke="#F9F9F9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px" x1="8.706" x2="15.104" y1="22" y2="22"></line>
+                                <path d="M12 15.745a4 4 0 0 1-4-4V6a4 4 0 0 1 8 0v5.745a4 4 0 0 1-4 4Z" fill="none" stroke="#F9F9F9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px"></path>
+                            </svg>
