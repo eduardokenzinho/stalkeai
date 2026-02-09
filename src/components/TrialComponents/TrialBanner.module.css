@@ -1,0 +1,133 @@
+/* Banner base */
+.trialBanner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 11px 15px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+}
+
+/* Posição NO TOPO (abaixo do header) */
+.topPosition {
+  top: 50px; /* altura do header */
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Posição EMBAIXO (acima do BottomNav) */
+.bottomPosition {
+  bottom: 52px; /* altura exata do BottomNav */
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.bannerContent {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 100%;
+}
+
+.bannerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.timerIcon {
+  width: 16px;
+  height: 16px;
+  color: #ffffff;
+}
+
+.timerText {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.5px;
+}
+
+.bannerText {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.vipButton {
+  flex-shrink: 0;
+  background: #ffffff;
+  color: #667eea;
+  border: none;
+  border-radius: 18px;
+  padding: 8px 17px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.vipButton:hover {
+  background: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.vipButton:active {
+  transform: scale(0.98);
+}
+
+/* Responsivo */
+@media (max-width: 400px) {
+  .trialBanner {
+    padding: 10px 12px;
+  }
+
+  .bannerText {
+    font-size: 11px;
+  }
+  
+  .vipButton {
+    font-size: 12px;
+    padding: 7px 16px;
+  }
+}
