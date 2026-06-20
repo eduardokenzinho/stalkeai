@@ -1,4 +1,52 @@
 ﻿const puppeteer = require('puppeteer');
+const { execFile } = require('child_process');
+const path = require('path');
+
+function runInstaloader(username) {
+  return new Promise((resolve) => {
+    const pythonBin = process.env.PYTHON_BIN || 'python';
+    const scriptPath = path.join(__dirname, 'instaloader-profile.py');
+
+    const child = execFile(
+      pythonBin,
+      [scriptPath, username],
+      {
+        timeout: parseInt(process.env.INSTALOADER_NODE_TIMEOUT || '25000', 10),
+        windowsHide: true,
+        maxBuffer: 1024 * 1024,
+      },
+      (error, stdout, stderr) => {
+        const rawOutput = String(stdout || '').trim();
+        if (rawOutput) {
+          try {
+            return resolve(JSON.parse(rawOutput));
+          } catch {
+            // Continua para o tratamento generico abaixo.
+          }
+        }
+
+        if (error) {
+          return resolve({
+            success: false,
+            error: stderr || error.message,
+          });
+        }
+
+        return resolve({
+          success: false,
+          error: 'Resposta vazia ou invalida do Instaloader',
+        });
+      }
+    );
+
+    child.on('error', (error) => {
+      resolve({
+        success: false,
+        error: error.message,
+      });
+    });
+  });
+}
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -99,6 +147,13 @@ module.exports = async (req, res) => {
 
   let browser;
   try {
+    const instaloaderData = await runInstaloader(clean);
+    if (instaloaderData?.success && instaloaderData.profile) {
+      res.setHeader('Cache-Control', 'public, max-age=300');
+      return res.status(200).json(instaloaderData);
+    }
+    console.warn('[Instaloader API] Fallback para Puppeteer:', instaloaderData?.error || 'sem dados');
+
     browser = await puppeteer.launch({
       headless: true,
       args: [

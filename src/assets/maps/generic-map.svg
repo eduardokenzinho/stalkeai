@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 753 565" role="img" aria-labelledby="title desc">
+  <title id="title">Light generic map</title>
+  <desc id="desc">A soft generic map with pale streets and neutral city blocks.</desc>
+  <defs>
+    <filter id="paper" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="2" seed="9"/>
+      <feColorMatrix type="saturate" values=".12"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 .05"/>
+      </feComponentTransfer>
+    </filter>
+    <linearGradient id="softFade" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8f8f8"/>
+      <stop offset=".55" stop-color="#fbfaf6"/>
+      <stop offset="1" stop-color="#eef4f9"/>
+    </linearGradient>
+    <linearGradient id="parkGlow" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#f4f6ed" stop-opacity="0"/>
+      <stop offset=".62" stop-color="#bdffd5" stop-opacity=".75"/>
+      <stop offset="1" stop-color="#dff4e7" stop-opacity=".1"/>
+    </linearGradient>
+  </defs>
+  <rect width="753" height="565" fill="url(#softFade)"/>
+  <rect width="753" height="565" filter="url(#paper)" opacity=".8"/>
+
+  <g fill="#f7edd5" opacity=".55">
+    <path d="M0 282H138V473H0Z"/>
+    <path d="M138 282H269V565H0V474H138Z" opacity=".82"/>
+    <path d="M270 282H569V565H271V501L320 536L354 498V375H234V342H270Z"/>
+    <path d="M585 283H753V565H585Z" opacity=".55"/>
+  </g>
+
+  <path d="M74 468H271V565H74Z" fill="url(#parkGlow)" opacity=".78"/>
+  <path d="M196 474C228 462 254 475 272 503V565H114C126 526 151 489 196 474Z" fill="#d7f4df" opacity=".36"/>
+
+  <g fill="none" stroke-linecap="square">
+    <path d="M66 0V565" stroke="#c6d0d9" stroke-width="7"/>
+    <path d="M167 0V565" stroke="#c6d0d9" stroke-width="7"/>
+    <path d="M268 0V565" stroke="#c6d0d9" stroke-width="7"/>
+    <path d="M371 0V565" stroke="#c6d0d9" stroke-width="7"/>
+    <path d="M472 0V565" stroke="#c6d0d9" stroke-width="7"/>
+    <path d="M570 0V565" stroke="#c6d0d9" stroke-width="14"/>
+    <path d="M676 0V565" stroke="#c6d0d9" stroke-width="9"/>
+
+    <path d="M0 95H753" stroke="#c6d0d9" stroke-width="7"/>
+    <path d="M0 187H513C542 193 562 208 586 227L753 338" stroke="#c6d0d9" stroke-width="18"/>
+    <path d="M0 197H506C532 199 554 214 579 234L753 358" stroke="#edf2f5" stroke-width="8"/>
+    <path d="M0 282H753" stroke="#c6d0d9" stroke-width="7"/>
+    <path d="M0 375H753" stroke="#c6d0d9" stroke-width="7"/>
+    <path d="M0 471H753" stroke="#c6d0d9" stroke-width="7"/>
+  </g>
+
+  <g fill="none" stroke="#c9d5de" stroke-linecap="round" stroke-linejoin="round" opacity=".9">
+    <path d="M651 126L719 123V94H674" stroke-width="4"/>
+    <path d="M704 94V133H719" stroke-width="4"/>
+    <path d="M731 152H758" stroke-width="4"/>
+    <path d="M700 292L753 292" stroke-width="4"/>
+    <path d="M733 214V254" stroke-width="4"/>
+    <path d="M727 292V438" stroke-width="5"/>
+    <path d="M708 469H753" stroke-width="4"/>
+  </g>
+
+  <g opacity=".28">
+    <circle cx="236" cy="42" r="175" fill="#ffffff"/>
+    <circle cx="121" cy="285" r="132" fill="#ffffff"/>
+    <circle cx="633" cy="542" r="150" fill="#ffffff"/>
+  </g>
+
+  <g opacity=".38">
+    <circle cx="520" cy="519" r="5" fill="#ffffff"/>
+    <circle cx="371" cy="552" r="12" fill="none" stroke="#9aa9b5" stroke-width="3"/>
+    <path d="M259 282V472" stroke="#b7d4c6" stroke-width="5" opacity=".65"/>
+  </g>
+
+  <rect x="0" y="0" width="753" height="565" fill="none" stroke="#b8c4cf" stroke-width="2" opacity=".45"/>
+</svg>

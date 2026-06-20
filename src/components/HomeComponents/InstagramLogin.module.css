@@ -45,10 +45,9 @@
 }
 
 .instaLogoImg {
-  height: 50px;
-  width: auto;
+  width: 178px;
+  height: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1);
 }
 
 /* Formulário */
@@ -362,7 +361,7 @@
   }
 
   .instaLogoImg {
-    height: 60px;
+    width: 196px;
   }
 
   .instagramLogo {
@@ -409,7 +408,7 @@
   }
 
   .instaLogoImg {
-    height: 42px;
+    width: 154px;
   }
 
   .instagramLogo {

@@ -6,6 +6,56 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+## Instagram scraper
+
+O endpoint `/api/get-instagram-puppeteer` tenta buscar dados publicos do Instagram com Instaloader primeiro. Se o Instagram bloquear, exigir login ou o Python falhar, ele volta automaticamente para o scraper Puppeteer que ja existia.
+
+Para preparar o motor Python:
+
+```bash
+pip install -r requirements.txt
+```
+
+Para buscar quem um perfil segue e 1 post de cada perfil seguido, use:
+
+```http
+POST /api/analisar
+Content-Type: application/json
+
+{
+  "username": "usuario"
+}
+```
+
+O endpoint tambem continua disponivel via `GET /api/followed-posts?username=usuario&limit=5`, que e a rota usada pelo Feed.
+
+Fluxo executado:
+
+1. Recebe o `username`.
+2. Busca o perfil principal com Instaloader.
+3. Retorna erro se o perfil for privado.
+4. Pega exatamente os 5 primeiros perfis que o usuario segue.
+5. Busca 1 post publico de cada um desses perfis.
+6. Retorna `profile`, `following`, `seguindo` e `posts`.
+7. Entrega imagens dos posts via `/api/proxy-image?raw=1&url=...`.
+
+Observacao: listar quem um perfil segue geralmente exige sessao do Instagram. Gere uma sessao local com:
+
+```bash
+instaloader --login=seu_usuario
+```
+
+Variaveis opcionais:
+
+```bash
+PYTHON_BIN=python
+INSTALOADER_NODE_TIMEOUT=25000
+INSTALOADER_FOLLOWED_NODE_TIMEOUT=90000
+INSTALOADER_TIMEOUT=18
+INSTALOADER_SESSION_USERNAME=seu_usuario
+INSTALOADER_SESSION_FILE=caminho/para/session-file
+```
+
 ### `npm start`
 
 Runs the app in the development mode.\

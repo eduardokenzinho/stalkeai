@@ -42,8 +42,104 @@ const POSTS = [
   { username: "Ra*****", avatar: av12, postImage: avChat2, likes: 213, comments: 5, time: "2 de outubro de 2024" },
 ];
 
+const FOLLOWED_DESCRIPTIONS = [
+  "Novo post publicado recentemente",
+  "Publicacao com muita interacao",
+  "Atividade recente no perfil",
+  "Post salvo entre as publicacoes recentes",
+  "Perfil seguido com conteudo privado",
+];
+
+function readTargetUsername() {
+  try {
+    return localStorage.getItem("current_username") || "";
+  } catch {
+    return "";
+  }
+}
+
+function getApiBase() {
+  const envBase = process.env.REACT_APP_API_BASE;
+  if (envBase && envBase.trim()) {
+    return envBase.trim().replace(/\/+$/, "");
+  }
+  return "";
+}
+
+function maskUsername(username) {
+  if (!username) return "Perfil";
+  if (username.length <= 2) return `${username[0] || ""}*****`;
+  return `${username.slice(0, 2)}*****`;
+}
+
+function toProxyImageUrl(imageUrl) {
+  if (!imageUrl || !/^https?:\/\//i.test(imageUrl)) return imageUrl;
+  return `${getApiBase()}/api/proxy-image?raw=1&url=${encodeURIComponent(imageUrl)}`;
+}
+
+function buildPosts(targetUsername, city, realPosts = [], followedProfiles = []) {
+  const targetLabel = targetUsername ? `Seguido por @${targetUsername}` : "Perfil seguido";
+
+  if (realPosts.length > 0) {
+    const mappedPosts = realPosts.map((post, index) => ({
+      username: post.fullName || maskUsername(post.username) || POSTS[index]?.username || "Perfil seguido",
+      avatar: toProxyImageUrl(post.avatar) || POSTS[index]?.avatar,
+      postImage: post.postImage || toProxyImageUrl(post.postImageRaw) || POSTS[index]?.postImage,
+      likes: post.likes || 0,
+      comments: post.comments || 0,
+      time: post.time ? new Date(post.time).toLocaleDateString("pt-BR") : "Recente",
+      location: post.username ? `@${post.username} - ${targetLabel}` : targetLabel,
+      description: post.description || FOLLOWED_DESCRIPTIONS[index] || "Post recente do perfil seguido",
+      imageBlur: 8 + index,
+      avatarBlur: 0,
+    }));
+
+    return [
+      ...mappedPosts,
+      ...POSTS.slice(mappedPosts.length),
+    ];
+  }
+
+  if (followedProfiles.length > 0) {
+    const mappedProfiles = followedProfiles.slice(0, 5).map((profile, index) => ({
+      username: profile.fullName || maskUsername(profile.username) || POSTS[index]?.username || "Perfil seguido",
+      avatar: toProxyImageUrl(profile.avatarRaw || profile.avatar) || POSTS[index]?.avatar,
+      postImage: POSTS[index]?.postImage,
+      likes: POSTS[index]?.likes || 0,
+      comments: POSTS[index]?.comments || 0,
+      time: "Recente",
+      location: profile.username ? `@${profile.username} - ${targetLabel}` : targetLabel,
+      description: profile.isPrivate
+        ? "Perfil seguido encontrado, mas o conteudo esta privado"
+        : "Perfil seguido encontrado; post publico indisponivel",
+      imageBlur: POSTS[index]?.imageBlur ?? 11 + index,
+      avatarBlur: 0,
+    }));
+
+    return [
+      ...mappedProfiles,
+      ...POSTS.slice(mappedProfiles.length),
+    ];
+  }
+
+  return POSTS.map((post, index) => {
+    if (index >= 5) return post;
+
+    return {
+      ...post,
+      location: index === 0 && city ? `${targetLabel} - ${city}` : targetLabel,
+      description: FOLLOWED_DESCRIPTIONS[index],
+      imageBlur: post.imageBlur ?? 11 + index,
+      avatarBlur: post.avatarBlur ?? 2,
+    };
+  });
+}
+
 export default function Feed() {
   const [city, setCity] = useState("");
+  const [targetUsername] = useState(readTargetUsername);
+  const [followedPosts, setFollowedPosts] = useState([]);
+  const [followedProfiles, setFollowedProfiles] = useState([]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -73,13 +169,34 @@ export default function Feed() {
     return () => controller.abort();
   }, []);
 
+  useEffect(() => {
+    if (!targetUsername) return;
+
+    const controller = new AbortController();
+    async function fetchFollowedPosts() {
+      try {
+        const apiBase = getApiBase();
+        const res = await fetch(`${apiBase}/api/followed-posts?username=${encodeURIComponent(targetUsername)}&limit=5`, {
+          signal: controller.signal,
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        setFollowedPosts(Array.isArray(data?.posts) ? data.posts.slice(0, 5) : []);
+        setFollowedProfiles(Array.isArray(data?.following) ? data.following.slice(0, 5) : []);
+      } catch {}
+    }
+
+    fetchFollowedPosts();
+    return () => controller.abort();
+  }, [targetUsername]);
+
   return (
     <div className="feed-page">
       <FeedHeader />
 
       <main className="feed-content">
-        <StoriesBar />
-        {POSTS.map((post, index) => (
+        <StoriesBar followedProfiles={followedProfiles} />
+        {buildPosts(targetUsername, city, followedPosts, followedProfiles).map((post, index) => (
           <FeedPost
             key={index}
             username={post.username}
@@ -88,7 +205,7 @@ export default function Feed() {
             comments={post.comments}
             time={post.time}
             blurLevel={index}
-            location={index === 0 && city ? city : post.location}
+            location={post.location}
             description={post.description}
             postImage={post.postImage}
             imageBlur={post.imageBlur}

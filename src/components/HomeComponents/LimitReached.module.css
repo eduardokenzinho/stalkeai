@@ -1,0 +1,184 @@
+.limitScreen {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.limitCard {
+  width: min(100%, 630px);
+  background: rgba(4, 7, 8, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 38px;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  padding: 24px 24px 22px;
+  text-align: center;
+  backdrop-filter: blur(26px) saturate(160%);
+  -webkit-backdrop-filter: blur(26px) saturate(160%);
+}
+
+.avatarRing {
+  width: 128px;
+  height: 128px;
+  margin: 0 auto 26px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, #4a37b6, #6f5ee8);
+  box-shadow: 0 14px 34px rgba(74, 55, 182, 0.28);
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #080a0b;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 0 0 20px;
+  color: #ff1f2d;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.alertIcon {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ff1f2d;
+  color: #090909;
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.message,
+.submessage {
+  max-width: 560px;
+  margin: 0 auto;
+  color: #b9bec8;
+  font-size: 24px;
+  line-height: 1.38;
+}
+
+.message {
+  margin-bottom: 22px;
+}
+
+.message strong {
+  color: #7f55ff;
+  font-weight: 800;
+}
+
+.submessage {
+  margin-bottom: 28px;
+}
+
+.unlockButton {
+  width: 100%;
+  min-height: 84px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border: 0;
+  border-radius: 34px;
+  background: linear-gradient(135deg, #563bd0 0%, #b157f0 100%);
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 14px 34px rgba(122, 72, 224, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.unlockButton:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.unlockButton:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.unlockButton svg {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.warningBox {
+  margin-top: 14px;
+  padding: 16px 20px;
+  border-radius: 18px;
+  background: rgba(83, 0, 8, 0.44);
+  color: #ff171f;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.warningBox strong {
+  font-weight: 900;
+}
+
+@media (max-width: 640px) {
+  .limitScreen {
+    padding: 16px;
+  }
+
+  .limitCard {
+    border-radius: 28px;
+    padding: 22px 18px 18px;
+  }
+
+  .avatarRing {
+    width: 104px;
+    height: 104px;
+    margin-bottom: 22px;
+  }
+
+  .title {
+    font-size: 23px;
+    gap: 10px;
+  }
+
+  .alertIcon {
+    width: 25px;
+    height: 25px;
+    font-size: 17px;
+  }
+
+  .message,
+  .submessage {
+    font-size: 19px;
+  }
+
+  .unlockButton {
+    min-height: 66px;
+    border-radius: 28px;
+    font-size: 19px;
+  }
+
+  .unlockButton svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  .warningBox {
+    font-size: 13px;
+  }
+}

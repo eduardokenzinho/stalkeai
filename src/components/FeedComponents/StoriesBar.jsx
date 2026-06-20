@@ -36,11 +36,32 @@ const STORIES = [
   { name: "Di*****", type: "locked", avatar: av10 },
 ];
 
-export default function StoriesBar() {
+function maskUsername(username) {
+  if (!username) return "Perfil";
+  if (username.length <= 2) return `${username[0] || ""}*****`;
+  return `${username.slice(0, 2)}*****`;
+}
+
+function toProxyImageUrl(imageUrl) {
+  if (!imageUrl || !/^https?:\/\//i.test(imageUrl)) return imageUrl;
+  return `/api/proxy-image?raw=1&url=${encodeURIComponent(imageUrl)}`;
+}
+
+export default function StoriesBar({ followedProfiles = [] }) {
   const [showPopup, setShowPopup] = useState(false);
 
   const profile = JSON.parse(localStorage.getItem('current_profile') || '{}');
   const selfAvatar = profile.profileImageUrl || selfAvatarFallback;
+  const visibleStories = followedProfiles.length > 0
+    ? [
+        ...followedProfiles.slice(0, 5).map((followed, index) => ({
+          name: maskUsername(followed.username || followed.fullName),
+          type: "locked",
+          avatar: toProxyImageUrl(followed.avatarRaw || followed.avatar) || STORIES[index]?.avatar,
+        })),
+        ...STORIES.slice(followedProfiles.length),
+      ]
+    : STORIES;
 
   return (
     <>
@@ -63,7 +84,7 @@ export default function StoriesBar() {
           </div>
 
           {/* STORIES FAKE (IG-LIKE) */}
-          {STORIES.map((story, index) => (
+          {visibleStories.map((story, index) => (
             <div className={styles.storyItem} key={index}>
               <button className={styles.storyButton} onClick={() => setShowPopup(true)}>
                 <div className={`${styles.storyRing} ${styles[story.type]}`}>

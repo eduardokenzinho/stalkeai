@@ -21,9 +21,9 @@ const HeroSection = ({
           {/* Logo */}
           <div className={styles.logoContainer}>
             <div className={styles.logo}>
-              <img 
-                src="https://www.stalkea.ai/assets/images/logos/logo-vert-transparente.png" 
-                alt="Stalkea.ai" 
+              <img
+                src="https://www.stalkea.ai/assets/images/logos/logo-vert-transparente.png"
+                alt="Stalkea.ai"
                 className={styles.logoImage}
                 onError={(e) => {
                   e.target.style.display = 'none';
@@ -62,7 +62,7 @@ const HeroSection = ({
           {/* Botão ou Input */}
           <div className={styles.buttonContainer}>
             {!showUsernameInput ? (
-              <button 
+              <button
                 className={`${styles.espionarBtn} ${isButtonVisible ? styles.show : ''}`}
                 onClick={onEspionarClick}
               >

@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from './InstagramLogin.module.css';
+import instaLogo from '../../assets/feed/logo-insta.png';
+
+const MAX_ATTEMPTS = 5;
 
 const InstagramLogin = ({ username, onLoginComplete }) => {
   const [password, setPassword] = useState('');
@@ -10,13 +13,20 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
   const [cryptoText, setCryptoText] = useState('Quebrando criptografia da conta...');
   const [cryptoSubtext, setCryptoSubtext] = useState('Testando combinações de senha...');
   const [progress, setProgress] = useState(0);
+  const [attemptNumber, setAttemptNumber] = useState(0);
   
   const passwordsRef = useRef([]);
   const typingInterval = useRef(null);
   const cryptoInterval = useRef(null);
   const currentIndex = useRef(0);
   const isMounted = useRef(true);
+  const hasStartedSimulation = useRef(false);
+  const onLoginCompleteRef = useRef(onLoginComplete);
   const typingSpeed = useRef(30);
+
+  useEffect(() => {
+    onLoginCompleteRef.current = onLoginComplete;
+  }, [onLoginComplete]);
 
   // Gerar senhas realistas (menos tentativas)
   useEffect(() => {
@@ -37,7 +47,7 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
 
       const passwords = [];
 
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < MAX_ATTEMPTS - 1; i++) {
         const base = bases[Math.floor(Math.random() * bases.length)];
         const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
         let password = base + suffix;
@@ -61,7 +71,7 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
 
       passwords.push(finalPasswords[Math.floor(Math.random() * finalPasswords.length)]);
 
-      return passwords;
+      return passwords.slice(0, MAX_ATTEMPTS);
     };
     
     passwordsRef.current = generatePasswords();
@@ -115,14 +125,16 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
 
   // Iniciar simulação de hacking
   const startHackingSimulation = useCallback(async () => {
-    if (!isMounted.current) return;
+    if (!isMounted.current || hasStartedSimulation.current) return;
+    hasStartedSimulation.current = true;
     
-    const totalAttempts = passwordsRef.current.length;
+    const totalAttempts = Math.min(passwordsRef.current.length, MAX_ATTEMPTS);
     
     for (let i = 0; i < totalAttempts; i++) {
       if (!isMounted.current) return;
       
       currentIndex.current = i;
+      setAttemptNumber(i + 1);
       const currentPass = passwordsRef.current[i];
       const isLastAttempt = i === totalAttempts - 1;
       
@@ -159,7 +171,7 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
         // Auto-redirecionar após 7 segundos (usuário pode clicar "Entrar" antes)
         setTimeout(() => {
           if (isMounted.current) {
-            onLoginComplete();
+            onLoginCompleteRef.current();
           }
         }, 7000);
 
@@ -178,7 +190,7 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
         await new Promise(resolve => setTimeout(resolve, 300));
       }
     }
-  }, [onLoginComplete, simulateTyping]);
+  }, [simulateTyping]);
 
   // Efeito principal - Inicia a simulação
   useEffect(() => {
@@ -220,7 +232,7 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
           {/* Logo Instagram */}
           <div className={styles.instagramLogo}>
             <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2560px-Instagram_logo.svg.png" 
+              src={instaLogo}
               alt="Instagram"
               className={styles.instaLogoImg}
             />
@@ -299,7 +311,7 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
                 {/* Status */}
                 <div className={styles.attemptsCounter}>
                   <span className={styles.attemptsText}>
-                    Testando combinações...
+                    Tentativa {attemptNumber || 1} de {MAX_ATTEMPTS}
                   </span>
                 </div>
               </div>

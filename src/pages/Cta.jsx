@@ -12,6 +12,7 @@ import packChat from '../assets/chat/pack1.1.chat2.png';
 import perfilSemFoto from '../assets/feed/perfil-sem-foto.jpeg';
 import story1 from '../assets/chat/chat3-story1.png';
 import story2 from '../assets/chat/chat3-story2.png';
+import genericMap from '../assets/maps/generic-map.svg';
 
 const Cta = () => {
   const [countdown, setCountdown] = useState('05:00');
@@ -325,7 +326,7 @@ const Cta = () => {
             </div>
             <div className={s.mapContainer}>
               <div className={s.mapWrapper}>
-                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)' }} />
+                <img src={genericMap} alt="Mapa genérico" />
                 <div className={s.mapPin}>
                   <img src={avatarUrl} alt="Localização" />
                 </div>
@@ -436,8 +437,8 @@ const Cta = () => {
             <div className={s.pricingOld}>De: R$ 279,90</div>
             <div className={s.pricingPrice}>
               <span className={s.pricingCurrency}>R$</span>
-              <span className={s.pricingValue}>47</span>
-              <span className={s.pricingCents}>,90</span>
+              <span className={s.pricingValue}>37</span>
+              <span className={s.pricingCents}>,00</span>
             </div>
             <div className={s.pricingBadges}>
               <div className={s.badgesTrack}>

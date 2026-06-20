@@ -7,8 +7,12 @@ const proxyImage = require('./api/proxy-image');
 const getProfileScrape = require('./api/get-profile-scrape');
 const getInstagramPuppeteer = require('./api/get-instagram-puppeteer');
 const getInstagramPuppeteerClean = require('./api/get-instagram-puppeteer-clean');
+const followedPosts = require('./api/followed-posts');
 
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const corsOrigins = process.env.CORS_ORIGINS
   ? process.env.CORS_ORIGINS.split(',').map((s) => s.trim()).filter(Boolean)
@@ -24,6 +28,8 @@ app.get('/api/proxy-image', (req, res) => proxyImage(req, res));
 app.get('/api/get-profile-scrape', (req, res) => getProfileScrape(req, res));
 app.get('/api/get-instagram-puppeteer', (req, res) => getInstagramPuppeteer(req, res));
 app.get('/api/get-instagram-puppeteer-clean', (req, res) => getInstagramPuppeteerClean(req, res));
+app.all('/api/followed-posts', (req, res) => followedPosts(req, res));
+app.all('/api/analisar', (req, res) => followedPosts(req, res));
 
 app.get('/api/health', (_req, res) => {
   res.status(200).json({ ok: true });
@@ -31,7 +37,7 @@ app.get('/api/health', (_req, res) => {
 
 const buildPath = path.join(__dirname, 'build');
 app.use(express.static(buildPath));
-app.get('/*', (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(buildPath, 'index.html'));
 });
 

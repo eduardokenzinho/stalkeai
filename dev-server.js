@@ -4,12 +4,16 @@ const searchProfile = require('./api/search-profile');
 const proxyImage = require('./api/proxy-image');
 const getProfileScrape = require('./api/get-profile-scrape');
 const getInstagramPuppeteer = require('./api/get-instagram-puppeteer');
+const followedPosts = require('./api/followed-posts');
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Habilita CORS para requisições do React em desenvolvimento
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3000'],
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:4000', 'http://127.0.0.1:3000', 'http://127.0.0.1:4000'],
   credentials: true
 }));
 
@@ -25,6 +29,11 @@ app.get('/api/get-instagram-puppeteer', (req, res) => {
   return getInstagramPuppeteer(req, res);
 });
 console.log('✓ Rota /api/get-instagram-puppeteer registrada');
+
+app.all('/api/followed-posts', (req, res) => followedPosts(req, res));
+console.log('Rota /api/followed-posts registrada');
+app.all('/api/analisar', (req, res) => followedPosts(req, res));
+console.log('Rota /api/analisar registrada');
 
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0', () => {

@@ -66,11 +66,18 @@ module.exports = async (req, res) => {
       });
     });
 
-    const base64 = imageBuffer.buffer.toString('base64');
     const contentType = imageBuffer.contentType || 'image/jpeg';
+    const raw = req.query.raw === '1' || req.query.format === 'image';
 
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Cache-Control', 'public, max-age=86400');
+
+    if (raw) {
+      res.setHeader('Content-Type', contentType);
+      return res.status(200).send(imageBuffer.buffer);
+    }
+
+    const base64 = imageBuffer.buffer.toString('base64');
     res.status(200).json({
       base64: `data:${contentType};base64,${base64}`
     });

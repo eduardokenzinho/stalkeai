@@ -5,6 +5,7 @@ import MatrixCanvas from '../components/HomeComponents/MatrixCanvas';
 import HeroSection from '../components/HomeComponents/HeroSection';
 import InstagramLogin from '../components/HomeComponents/InstagramLogin';
 import ConfirmModal from '../components/HomeComponents/ConfirmModal';
+import LimitReached from '../components/HomeComponents/LimitReached';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -21,10 +22,12 @@ const Home = () => {
   const [modalProfileData, setModalProfileData] = useState(null);
   const [showInstagramLogin, setShowInstagramLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showLimitReached, setShowLimitReached] = useState(false);
+  const [limitProfile, setLimitProfile] = useState(null);
 
   useEffect(() => {
     // Limpa dados de trial expirados em vez de redirecionar automaticamente.
-    // Isso facilita testes locais — se preferir, podemos restaurar o redirecionamento.
+    // Isso facilita testes locais - se preferir, podemos restaurar o redirecionamento.
     const trialActive = localStorage.getItem('trial_active');
     const trialExpires = localStorage.getItem('trial_expires');
 
@@ -43,7 +46,7 @@ const Home = () => {
   useEffect(() => {
     const fullTitle = "O que seu Cônjuge faz quando está no Instagram?";
     const fullSubtitle = "Descubra a verdade sobre qualquer pessoa, acessando o instagram dela!";
-    
+
     const typeAnimation = async () => {
       for (let i = 0; i <= fullTitle.length; i++) {
         setTitleText(fullTitle.substring(0, i));
@@ -77,7 +80,7 @@ const Home = () => {
 
     const savedValue = localStorage.getItem('stats_number');
     let current = savedValue ? parseInt(savedValue) : 84693;
-    
+
     if (!savedValue) {
       localStorage.setItem('stats_number', current.toString());
     }
@@ -101,7 +104,49 @@ const Home = () => {
     setDayOfWeek(days[today.getDay()]);
   }, []);
 
+  const getLastSearchedProfile = () => {
+    const savedUsers = JSON.parse(localStorage.getItem('searched_users') || '[]');
+    if (savedUsers.length > 0) {
+      return [...savedUsers].sort((a, b) => (b.searchedAt || 0) - (a.searchedAt || 0))[0];
+    }
+
+    const currentUsername = localStorage.getItem('current_username');
+    const currentProfile = JSON.parse(localStorage.getItem('current_profile') || 'null');
+    if (currentUsername || currentProfile) {
+      return {
+        username: currentUsername || currentProfile?.fullName || 'usuario',
+        ...currentProfile
+      };
+    }
+
+    return null;
+  };
+
+  const hasUsedFreeSearch = () => Boolean(getLastSearchedProfile());
+
+  const openLimitReached = () => {
+    const lastProfile = getLastSearchedProfile();
+    setLimitProfile(lastProfile);
+    setShowInstagramLogin(false);
+    setShowConfirmModal(false);
+    setShowLimitReached(true);
+  };
+
+  const handleUnlockVip = () => {
+    const lastProfile = limitProfile || getLastSearchedProfile();
+    if (lastProfile) {
+      localStorage.setItem('current_username', lastProfile.username || 'usuario');
+      localStorage.setItem('current_profile', JSON.stringify(lastProfile));
+    }
+    navigate('/cta');
+  };
+
   const handleEspionarClick = () => {
+    if (hasUsedFreeSearch()) {
+      openLimitReached();
+      return;
+    }
+
     setShowUsernameInput(true);
   };
 
@@ -173,7 +218,7 @@ const Home = () => {
     if (!bio) return { followers: null, following: null, posts: null };
     const followersMatch = bio.match(/([\d.,]+(?:\s*[kmb])?)\s*(followers|seguidores)/i);
     const followingMatch = bio.match(/([\d.,]+(?:\s*[kmb])?)\s*(following|seguindo)/i);
-    const postsMatch = bio.match(/([\d.,]+(?:\s*[kmb])?)\s*(posts|publica[c�][o�]es?)/i);
+    const postsMatch = bio.match(/([\d.,]+(?:\s*[kmb])?)\s*(posts|publica[cç][oõ]es?)/i);
 
     return {
       followers: followersMatch ? parseCountToken(followersMatch[1]) : null,
@@ -190,6 +235,11 @@ const Home = () => {
       return;
     }
 
+    if (hasUsedFreeSearch()) {
+      openLimitReached();
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -201,7 +251,7 @@ const Home = () => {
       const apiBase = getApiBase();
       const apiUrl = `${apiBase}/api/get-instagram-puppeteer?username=${encodeURIComponent(cleanUsername)}`;
 
-      console.log('🔗 Chamando API de dados REAIS:', apiUrl);
+      console.log('Chamando API de dados REAIS:', apiUrl);
 
       const response = await fetch(apiUrl, {
         signal: controller.signal,
@@ -215,7 +265,7 @@ const Home = () => {
       if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
 
       const data = await response.json();
-      console.log('✅ Resposta da API:', data);
+      console.log('Resposta da API:', data);
 
       // Extrai dados da nova resposta da API
       const profile = data?.profile || null;
@@ -272,7 +322,7 @@ const Home = () => {
         throw new Error('Perfil nao encontrado');
       }
     } catch (error) {
-      console.error('❌ Erro ao buscar perfil:', error);
+      console.error('Erro ao buscar perfil:', error);
       console.error('Mensagem:', error.message);
 
       const mockProfileData = {
@@ -324,8 +374,14 @@ const Home = () => {
   return (
     <div className={styles.homePage}>
       <MatrixCanvas />
-      
-      {!showInstagramLogin ? (
+
+      {showLimitReached ? (
+        <LimitReached
+          username={limitProfile?.username}
+          avatarUrl={limitProfile?.profileImageUrl}
+          onUnlock={handleUnlockVip}
+        />
+      ) : !showInstagramLogin ? (
         <>
           <HeroSection
             titleText={titleText}
@@ -340,7 +396,7 @@ const Home = () => {
             onUsernameSubmit={handleUsernameSubmit}
             onKeyPress={handleKeyPress}
           />
-          
+
           <div className={`${styles.homeStatsContainer} ${isStatsVisible ? styles.homeVisible : ''}`}>
             <p className={styles.homeStatsText}>
               <span className={styles.homeStatsNumber}>+{statsNumber.toLocaleString('pt-BR')}</span>{' '}
@@ -356,7 +412,7 @@ const Home = () => {
           }}
         />
       )}
-      
+
       <ConfirmModal
         showConfirmModal={showConfirmModal}
         username={username}
@@ -369,16 +425,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-
-
-
-
-
-
-
-
-
-
-
