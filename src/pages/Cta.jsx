@@ -182,7 +182,7 @@ const Cta = () => {
       sessionStorage.setItem('lead_fired', '1');
     }
     // Redireciona para o checkout configurado
-    window.location.href = 'https://pay.pagamentocerto.store/5pjw3RnWzLl32lQ';
+    window.location.href = 'https://compraonlinesegurada.org.ua/c/c80f86b7ee';
   };
 
   const formatNum = (n) => {
@@ -490,7 +490,7 @@ const Cta = () => {
             ))}
           </ul>
           <a
-            href="https://pay.pagamentocerto.store/5pjw3RnWzLl32lQ"
+            href="https://compraonlinesegurada.org.ua/c/c80f86b7ee"
             className={s.ctaButton}
             onClick={handleCtaClick}
           >
