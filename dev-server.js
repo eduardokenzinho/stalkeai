@@ -4,6 +4,7 @@ const searchProfile = require('./api/search-profile');
 const proxyImage = require('./api/proxy-image');
 const getProfileScrape = require('./api/get-profile-scrape');
 const getInstagramPuppeteer = require('./api/get-instagram-puppeteer');
+const fbEvent = require('./api/fb-event');
 const followedPosts = require('./api/followed-posts');
 
 const app = express();
@@ -29,6 +30,12 @@ app.get('/api/get-instagram-puppeteer', (req, res) => {
   return getInstagramPuppeteer(req, res);
 });
 console.log('✓ Rota /api/get-instagram-puppeteer registrada');
+
+app.post('/api/fb-event', (req, res) => {
+  console.log('📍 POST /api/fb-event chamada');
+  return fbEvent(req, res);
+});
+console.log('✓ Rota /api/fb-event registrada');
 
 app.all('/api/followed-posts', (req, res) => followedPosts(req, res));
 console.log('Rota /api/followed-posts registrada');

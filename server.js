@@ -7,6 +7,7 @@ const proxyImage = require('./api/proxy-image');
 const getProfileScrape = require('./api/get-profile-scrape');
 const getInstagramPuppeteer = require('./api/get-instagram-puppeteer');
 const getInstagramPuppeteerClean = require('./api/get-instagram-puppeteer-clean');
+const fbEvent = require('./api/fb-event');
 const followedPosts = require('./api/followed-posts');
 
 const app = express();

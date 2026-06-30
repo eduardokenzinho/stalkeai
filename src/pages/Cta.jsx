@@ -175,14 +175,46 @@ const Cta = () => {
     document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
-  const handleCtaClick = (e) => {
+  const getApiBase = () => {
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://localhost:5000';
+    }
+    return '';
+  };
+
+  const sendServerFbEvent = async (eventName, customData = {}, userData = {}) => {
+    try {
+      const apiBase = getApiBase();
+      await fetch(`${apiBase}/api/fb-event`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          eventName,
+          eventSourceUrl: window.location.href,
+          actionSource: 'website',
+          customData,
+          userData
+        })
+      });
+    } catch (error) {
+      console.warn('[FB Event] failed to send', error);
+    }
+  };
+
+  const handleCtaClick = async (e) => {
     e.preventDefault();
     if (!sessionStorage.getItem('lead_fired')) {
-      // Meta Pixel removed
+      await sendServerFbEvent('Lead', {
+        content_name: 'cta',
+        currency: 'BRL',
+        value: 1
+      });
       sessionStorage.setItem('lead_fired', '1');
     }
     // Redireciona para o checkout configurado
-    window.location.href = 'https://compraonlinesegurada.org.ua/c/c80f86b7ee';
+    window.location.href = 'https://compraonlineseguura.com/c/c80f86b7ee';
   };
 
   const formatNum = (n) => {
