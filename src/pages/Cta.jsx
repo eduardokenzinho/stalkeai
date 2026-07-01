@@ -20,6 +20,12 @@ const Cta = () => {
   const [activeTest, setActiveTest] = useState(0);
   const [popup, setPopup] = useState({ show: false, text: '' });
   const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    localStorage.removeItem('trial_active');
+    localStorage.removeItem('trial_expires');
+    localStorage.removeItem('trial_start');
+  }, []);
   const chatRef = useRef(null);
   const canvasRef = useRef(null);
 

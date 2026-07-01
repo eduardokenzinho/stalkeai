@@ -17,7 +17,7 @@ const Home = () => {
   const [statsNumber, setStatsNumber] = useState(84693);
   const [dayOfWeek, setDayOfWeek] = useState('domingo');
   const [showUsernameInput, setShowUsernameInput] = useState(false);
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(() => localStorage.getItem('current_username') || '');
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [modalProfileData, setModalProfileData] = useState(null);
   const [showInstagramLogin, setShowInstagramLogin] = useState(false);
@@ -131,6 +131,15 @@ const Home = () => {
     setShowConfirmModal(false);
     setShowLimitReached(true);
   };
+
+  useEffect(() => {
+    const lastProfile = getLastSearchedProfile();
+    if (lastProfile) {
+      setUsername(lastProfile.username || localStorage.getItem('current_username') || '');
+      setLimitProfile(lastProfile);
+      setShowLimitReached(true);
+    }
+  }, []);
 
   const handleUnlockVip = () => {
     const lastProfile = limitProfile || getLastSearchedProfile();
