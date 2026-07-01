@@ -14,7 +14,7 @@ export default function TrialGuard({ children }) {
 
   // Trial expirou → bloqueia tudo
   if (now >= expiresAt) {
-    return <Navigate to="/cta" replace />;
+    return <Navigate to="/cta" />;
   }
 
   // Trial válido → deixa acessar

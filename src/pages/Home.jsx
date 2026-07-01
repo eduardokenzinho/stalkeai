@@ -348,7 +348,7 @@ const Home = () => {
     setShowConfirmModal(false);
     setShowInstagramLogin(true);
 
-    // ====== PASSO 1: INICIAR TRIAL DE 5 MINUTOS ======
+    // ====== PASSO 1: INICIAR TRIAL DE 30 SEGUNDOS ======
     const cleanUsername = username.trim().replace(/^@+/, '');
 
     localStorage.setItem('current_username', cleanUsername);
@@ -356,8 +356,8 @@ const Home = () => {
     const now = Date.now();
     localStorage.setItem('trial_start', now.toString());
 
-    const fiveMinutes = 5 * 60 * 1000;
-    const trialExpires = now + fiveMinutes;
+    const trialDurationMs = 40 * 1000;
+    const trialExpires = now + trialDurationMs;
     localStorage.setItem('trial_expires', trialExpires.toString());
 
     localStorage.setItem('trial_active', 'true');

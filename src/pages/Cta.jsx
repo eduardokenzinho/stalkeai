@@ -15,7 +15,7 @@ import story2 from '../assets/chat/chat3-story2.png';
 import genericMap from '../assets/maps/generic-map.svg';
 
 const Cta = () => {
-  const [countdown, setCountdown] = useState('05:00');
+  const [countdown, setCountdown] = useState('01:00');
   const [activeFaq, setActiveFaq] = useState(null);
   const [activeTest, setActiveTest] = useState(0);
   const [popup, setPopup] = useState({ show: false, text: '' });
@@ -93,9 +93,9 @@ const Cta = () => {
     };
   }, []);
 
-  // Timer - 5 minutos
+  // Timer - 1 minuto
   useEffect(() => {
-    const TIMER_DURATION = 300000;
+    const TIMER_DURATION = 60000;
     const TIMER_KEY = 'timer_start';
 
     let startTime = localStorage.getItem(TIMER_KEY);
