@@ -98,7 +98,7 @@ const Cta = () => {
   useEffect(() => {
     const TIMER_DURATION = 60000;
     const TIMER_KEY = 'timer_start';
-    const CHECKOUT_URL = 'https://compraonlineseguura.com/c/c80f86b7ee';
+    const CHECKOUT_URL = 'https://checkout.perfectpay.com.br/pay/PPU38CQDQKJ';
 
     let startTime = localStorage.getItem(TIMER_KEY);
     if (!startTime) {
@@ -225,7 +225,7 @@ const Cta = () => {
       sessionStorage.setItem('lead_fired', '1');
     }
     // Redireciona para o checkout configurado
-    window.location.href = 'https://compraonlineseguura.com/c/c80f86b7ee';
+    window.location.href = 'https://checkout.perfectpay.com.br/pay/PPU38CQDQKJ';
   };
 
   const formatNum = (n) => {
