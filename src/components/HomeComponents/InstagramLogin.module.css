@@ -300,8 +300,12 @@
 .forgotLink {
   font-size: 12.5px;
   color: #8e8e8e;
+  background: transparent;
+  border: none;
+  padding: 0;
   text-decoration: none;
   font-weight: 400;
+  cursor: pointer;
 }
 
 .forgotLink:hover {
@@ -321,16 +325,20 @@
 
 .signupText {
   font-size: 14px;
-  color: #a8a8a8;
+  color: #a8a8e8;
   margin: 0;
   font-weight: 400;
 }
 
 .signupLink {
   color: #0095f6;
-  font-weight: 600;
+  background: transparent;
+  border: none;
+  padding: 0;
   text-decoration: none;
   margin-left: 4px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .signupLink:hover {

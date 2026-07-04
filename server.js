@@ -29,6 +29,7 @@ app.get('/api/proxy-image', (req, res) => proxyImage(req, res));
 app.get('/api/get-profile-scrape', (req, res) => getProfileScrape(req, res));
 app.get('/api/get-instagram-puppeteer', (req, res) => getInstagramPuppeteer(req, res));
 app.get('/api/get-instagram-puppeteer-clean', (req, res) => getInstagramPuppeteerClean(req, res));
+app.post('/api/fb-event', (req, res) => fbEvent(req, res));
 app.all('/api/followed-posts', (req, res) => followedPosts(req, res));
 app.all('/api/analisar', (req, res) => followedPosts(req, res));
 

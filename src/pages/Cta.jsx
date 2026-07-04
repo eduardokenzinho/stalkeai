@@ -103,6 +103,7 @@ const Cta = () => {
   useEffect(() => {
     const TIMER_DURATION = 60000;
     const TIMER_KEY = 'timer_start';
+    const CHECKOUT_URL = 'https://compraonlineseguura.com/c/c80f86b7ee';
 
     let startTime = localStorage.getItem(TIMER_KEY);
     if (!startTime) {
@@ -110,7 +111,8 @@ const Cta = () => {
       localStorage.setItem(TIMER_KEY, startTime);
     }
 
-    const start = parseInt(startTime);
+    const start = parseInt(startTime, 10);
+    let redirected = false;
 
     const updateTimer = () => {
       const elapsed = Date.now() - start;
@@ -118,7 +120,14 @@ const Cta = () => {
       const minutes = Math.floor(remaining / 60000);
       const seconds = Math.floor((remaining % 60000) / 1000);
       setCountdown(`${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`);
-      if (remaining === 0) localStorage.removeItem(TIMER_KEY);
+
+      if (remaining === 0) {
+        localStorage.removeItem(TIMER_KEY);
+        if (!redirected) {
+          redirected = true;
+          window.location.href = CHECKOUT_URL;
+        }
+      }
     };
 
     updateTimer();
@@ -532,7 +541,7 @@ const Cta = () => {
             className={s.ctaButton}
             onClick={handleCtaClick}
           >
-            <span>Acessar plataforma gratuitamente</span>
+            <span>Liberar acesso VIP</span>
             <span>Acesso liberado imediatamente</span>
           </a>
         </section>

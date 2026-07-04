@@ -52,11 +52,12 @@ export default function StoriesBar({ followedProfiles = [] }) {
 
   const profile = JSON.parse(localStorage.getItem('current_profile') || '{}');
   const selfAvatar = profile.profileImageUrl || selfAvatarFallback;
+
   const visibleStories = followedProfiles.length > 0
     ? [
         ...followedProfiles.slice(0, 5).map((followed, index) => ({
           name: maskUsername(followed.username || followed.fullName),
-          type: "locked",
+          type: 'locked',
           avatar: toProxyImageUrl(followed.avatarRaw || followed.avatar) || STORIES[index]?.avatar,
         })),
         ...STORIES.slice(followedProfiles.length),
@@ -87,7 +88,7 @@ export default function StoriesBar({ followedProfiles = [] }) {
           {visibleStories.map((story, index) => (
             <div className={styles.storyItem} key={index}>
               <button className={styles.storyButton} onClick={() => setShowPopup(true)}>
-                <div className={`${styles.storyRing} ${styles[story.type]}`}>
+                <div className={`${styles.storyRing} ${styles[story.type]} ${index >= 1 && index <= 2 ? styles.closeFriend : ''}`}>
                   <div className={styles.storyAvatar}>
                     <img src={story.avatar} alt={story.name} />
                   </div>

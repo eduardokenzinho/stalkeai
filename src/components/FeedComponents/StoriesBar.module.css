@@ -41,8 +41,14 @@
   background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
 }
 
+.storyRing.closeFriend {
+  background: linear-gradient(45deg, #9ef7b8, #1ed760, #1ed760);
+  box-shadow: 0 0 0 2px rgba(30, 215, 96, 0.2);
+}
+
 .storyRing.self {
-  background: rgb(31, 41, 55);
+  background: linear-gradient(45deg, #1ED760, #16C34A);
+  box-shadow: 0 0 0 2px rgba(30, 215, 96, 0.25);
 }
 
 /* AVATAR */
@@ -75,8 +81,8 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #f9f9f9;
-  border: 2.4px solid rgb(31, 41, 55);
+  background: rgb(15, 23, 42);
+  border: 2.4px solid rgb(71, 85, 105);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,7 +91,7 @@
 .addStory span {
   font-size: 16px;
   font-weight: bold;
-  color: rgb(31, 41, 55);
+  color: rgb(226, 232, 240);
 }
 
 /* USERNAME */

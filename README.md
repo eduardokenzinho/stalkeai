@@ -89,6 +89,46 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
+## Facebook Pixel e Facebook Conversion API
+
+Este projeto usa o Meta Pixel no front-end e um endpoint de servidor para enviar eventos via Facebook Conversion API.
+
+- Pixel client-side: atualizado em `public/index.html` para o ID `2767322150312437`.
+- Endpoint server-side: `api/fb-event.js` lê as variáveis de ambiente `FB_PIXEL_ID` e `FB_ACCESS_TOKEN`.
+
+Como configurar (recomendado):
+
+- Crie um arquivo de ambiente local para desenvolvimento (NUNCA comite este arquivo):
+
+```
+# .env.local (exemplo, não comitar)
+FB_PIXEL_ID=2767322150312437
+FB_ACCESS_TOKEN=SEU_TOKEN_AQUI
+FB_API_VERSION=v16.0
+FB_TEST_EVENT_CODE=
+```
+
+- Em PowerShell, para testes rápidos sem arquivo `.env`:
+
+```powershell
+$env:FB_PIXEL_ID="2767322150312437"
+$env:FB_ACCESS_TOKEN="SEU_TOKEN_AQUI"
+npm start
+```
+
+- Em plataformas de hosting (Vercel, Railway, Heroku, etc.), defina `FB_PIXEL_ID` e `FB_ACCESS_TOKEN` nas configurações de Environment Variables do projeto.
+
+Notas de segurança e operação:
+
+- **Não** comite `FB_ACCESS_TOKEN` no repositório. Trate-o como um segredo.
+- Após alterar `public/index.html`, regenere o bundle de produção para atualizar `build/` com:
+
+```bash
+npm run build
+```
+
+- `api/fb-event.js` usa `FB_PIXEL_ID` e `FB_ACCESS_TOKEN` para enviar eventos à Graph API; verifique permissões e validade do token antes de enviar eventos em produção.
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).

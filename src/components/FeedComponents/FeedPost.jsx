@@ -19,7 +19,7 @@ function formatNumber(n) {
   return n.toLocaleString("pt-BR");
 }
 
-export default function FeedPost({ username, avatar, likes, comments, time, blurLevel = 0, location, description, postImage, imageBlur, avatarBlur }) {
+export default function FeedPost({ username, avatar, likes, comments, time, blurLevel = 0, description, postImage, imageBlur, avatarBlur }) {
   const [showPopup, setShowPopup] = useState(false);
 
   const handleBlocked = () => setShowPopup(true);
@@ -42,7 +42,6 @@ export default function FeedPost({ username, avatar, likes, comments, time, blur
             </div>
             <div className={styles.postUserInfo}>
               <span className={styles.postUsername}>{username}</span>
-              {location && <span className={styles.postLocation}>{location}</span>}
             </div>
           </div>
           <button className={styles.postMenu} onClick={handleBlocked}>•••</button>

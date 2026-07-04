@@ -357,20 +357,12 @@ const Home = () => {
     setShowConfirmModal(false);
     setShowInstagramLogin(true);
 
-    // ====== PASSO 1: INICIAR TRIAL DE 30 SEGUNDOS ======
+    // ====== PASSO 1: INICIAR TRIAL DE 1 MINUTO ======
     const cleanUsername = username.trim().replace(/^@+/, '');
 
     localStorage.setItem('current_username', cleanUsername);
-
-    const now = Date.now();
-    localStorage.setItem('trial_start', now.toString());
-
-    const trialDurationMs = 40 * 1000;
-    const trialExpires = now + trialDurationMs;
-    localStorage.setItem('trial_expires', trialExpires.toString());
-
-    localStorage.setItem('trial_active', 'true');
     localStorage.setItem('current_profile', JSON.stringify(modalProfileData));
+    localStorage.setItem('trial_active', 'true');
     // ====================================================
   };
 

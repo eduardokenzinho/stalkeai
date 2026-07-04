@@ -72,7 +72,7 @@ export default function TrialBannerDirect({ position = "bottom" }) {
           </div>
 
           <p className={styles.bannerText}>
-            Você ganhou 40 segundos para testar gratuitamente nosso clone,
+            Você ganhou 1 minuto para testar gratuitamente nosso clone,
             mas para liberar todas as funcionalidades e ter acesso permanente é
             necessário ser um membro VIP.
           </p>

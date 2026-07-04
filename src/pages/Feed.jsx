@@ -77,6 +77,28 @@ function toProxyImageUrl(imageUrl) {
   return `${getApiBase()}/api/proxy-image?raw=1&url=${encodeURIComponent(imageUrl)}`;
 }
 
+function randomDateWithinLastMonths(months = 3) {
+  const now = new Date();
+  const past = new Date(now);
+  past.setMonth(now.getMonth() - months);
+  const timestamp = past.getTime() + Math.random() * (now.getTime() - past.getTime());
+  const date = new Date(timestamp);
+  return new Intl.DateTimeFormat("pt-BR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+}
+
+function shuffleArray(array) {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
 function buildPosts(targetUsername, city, realPosts = [], followedProfiles = []) {
   const targetLabel = targetUsername ? `Seguido por @${targetUsername}` : "Perfil seguido";
 
@@ -87,17 +109,20 @@ function buildPosts(targetUsername, city, realPosts = [], followedProfiles = [])
       postImage: post.postImage || toProxyImageUrl(post.postImageRaw) || POSTS[index]?.postImage,
       likes: post.likes || 0,
       comments: post.comments || 0,
-      time: post.time ? new Date(post.time).toLocaleDateString("pt-BR") : "Recente",
+      time: post.time ? new Date(post.time).toLocaleDateString("pt-BR") : randomDateWithinLastMonths(3),
       location: post.username ? `@${post.username} - ${targetLabel}` : targetLabel,
       description: post.description || FOLLOWED_DESCRIPTIONS[index] || "Post recente do perfil seguido",
       imageBlur: 8 + index,
       avatarBlur: 0,
     }));
 
-    return [
+    return shuffleArray([
       ...mappedPosts,
-      ...POSTS.slice(mappedPosts.length),
-    ];
+      ...POSTS.slice(mappedPosts.length).map(post => ({
+        ...post,
+        time: randomDateWithinLastMonths(3),
+      })),
+    ]);
   }
 
   if (followedProfiles.length > 0) {
@@ -107,7 +132,7 @@ function buildPosts(targetUsername, city, realPosts = [], followedProfiles = [])
       postImage: POSTS[index]?.postImage,
       likes: POSTS[index]?.likes || 0,
       comments: POSTS[index]?.comments || 0,
-      time: "Recente",
+      time: randomDateWithinLastMonths(3),
       location: profile.username ? `@${profile.username} - ${targetLabel}` : targetLabel,
       description: profile.isPrivate
         ? "Perfil seguido encontrado, mas o conteudo esta privado"
@@ -116,23 +141,38 @@ function buildPosts(targetUsername, city, realPosts = [], followedProfiles = [])
       avatarBlur: 0,
     }));
 
-    return [
+    return shuffleArray([
       ...mappedProfiles,
-      ...POSTS.slice(mappedProfiles.length),
-    ];
+      ...POSTS.slice(mappedProfiles.length).map(post => ({
+        ...post,
+        time: randomDateWithinLastMonths(3),
+      })),
+    ]);
   }
 
-  return POSTS.map((post, index) => {
-    if (index >= 5) return post;
+  return shuffleArray(
+    POSTS.map((post, index) => {
+      if (index >= 5) {
+        return {
+          ...post,
+          time: randomDateWithinLastMonths(3),
+        };
+      }
 
-    return {
-      ...post,
-      location: index === 0 && city ? `${targetLabel} - ${city}` : targetLabel,
-      description: FOLLOWED_DESCRIPTIONS[index],
-      imageBlur: post.imageBlur ?? 11 + index,
-      avatarBlur: post.avatarBlur ?? 2,
-    };
-  });
+      return {
+        ...post,
+        time: randomDateWithinLastMonths(3),
+        location: index === 0 && city ? `${targetLabel} - ${city}` : targetLabel,
+        description: FOLLOWED_DESCRIPTIONS[index],
+        imageBlur: post.imageBlur ?? 11 + index,
+        avatarBlur: post.avatarBlur ?? 2,
+      };
+    })
+  );
+}
+
+function getFeedStorageKey(username) {
+  return `feed_posts_${username}`;
 }
 
 export default function Feed() {
@@ -140,6 +180,7 @@ export default function Feed() {
   const [targetUsername] = useState(readTargetUsername);
   const [followedPosts, setFollowedPosts] = useState([]);
   const [followedProfiles, setFollowedProfiles] = useState([]);
+  const [feedItems, setFeedItems] = useState([]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -190,13 +231,44 @@ export default function Feed() {
     return () => controller.abort();
   }, [targetUsername]);
 
+  useEffect(() => {
+    if (!targetUsername) return;
+
+    const storageKey = getFeedStorageKey(targetUsername);
+    const stored = localStorage.getItem(storageKey);
+
+    if (stored) {
+      try {
+        setFeedItems(JSON.parse(stored));
+        return;
+      } catch {
+        localStorage.removeItem(storageKey);
+      }
+    }
+
+    const items = buildPosts(targetUsername, city, followedPosts, followedProfiles);
+    localStorage.setItem(storageKey, JSON.stringify(items));
+    setFeedItems(items);
+  }, [targetUsername, city, followedPosts, followedProfiles]);
+
+  useEffect(() => {
+    const trialActive = localStorage.getItem('trial_active') === 'true';
+    const trialExpires = localStorage.getItem('trial_expires');
+
+    if (trialActive && !trialExpires) {
+      const now = Date.now();
+      localStorage.setItem('trial_start', now.toString());
+      localStorage.setItem('trial_expires', (now + 60 * 1000).toString());
+    }
+  }, []);
+
   return (
     <div className="feed-page">
       <FeedHeader />
 
       <main className="feed-content">
         <StoriesBar followedProfiles={followedProfiles} />
-        {buildPosts(targetUsername, city, followedPosts, followedProfiles).map((post, index) => (
+        {feedItems.map((post, index) => (
           <FeedPost
             key={index}
             username={post.username}

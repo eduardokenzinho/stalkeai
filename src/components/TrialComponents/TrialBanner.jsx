@@ -24,6 +24,16 @@ export default function TrialBanner({ position = "bottom" }) {
   });
 
   useEffect(() => {
+    if (isVisible) return;
+
+    const updatedTime = getTimeLeft();
+    if (updatedTime) {
+      setTimeLeft(updatedTime);
+      setIsVisible(true);
+    }
+  }, [isVisible]);
+
+  useEffect(() => {
     if (!isVisible) return;
 
     const interval = setInterval(() => {
@@ -72,7 +82,7 @@ export default function TrialBanner({ position = "bottom" }) {
           </div>
 
           <p className={styles.bannerText}>
-            Você ganhou 40 segundos para testar gratuitamente nosso clone,
+            Você ganhou 1 minuto para testar gratuitamente nosso clone,
             mas para liberar todas as funcionalidades e ter acesso permanente é
             necessário ser um membro VIP.
           </p>
