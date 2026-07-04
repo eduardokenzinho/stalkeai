@@ -26,8 +26,6 @@ const Home = () => {
   const [limitProfile, setLimitProfile] = useState(null);
 
   useEffect(() => {
-    // Limpa dados de trial expirados em vez de redirecionar automaticamente.
-    // Isso facilita testes locais - se preferir, podemos restaurar o redirecionamento.
     const trialActive = localStorage.getItem('trial_active');
     const trialExpires = localStorage.getItem('trial_expires');
 
@@ -36,7 +34,6 @@ const Home = () => {
       if (Date.now() >= expires) {
         localStorage.removeItem('trial_active');
         localStorage.removeItem('trial_expires');
-        localStorage.removeItem('current_profile');
         localStorage.removeItem('trial_start');
       }
     }

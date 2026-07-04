@@ -21,11 +21,6 @@ const Cta = () => {
   const [popup, setPopup] = useState({ show: false, text: '' });
   const [messages, setMessages] = useState([]);
 
-  useEffect(() => {
-    localStorage.removeItem('trial_active');
-    localStorage.removeItem('trial_expires');
-    localStorage.removeItem('trial_start');
-  }, []);
   const chatRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -123,6 +118,7 @@ const Cta = () => {
 
       if (remaining === 0) {
         localStorage.removeItem(TIMER_KEY);
+        localStorage.setItem('trial_active', 'false');
         if (!redirected) {
           redirected = true;
           window.location.href = CHECKOUT_URL;
