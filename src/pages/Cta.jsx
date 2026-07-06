@@ -14,7 +14,7 @@ import story1 from '../assets/chat/chat3-story1.png';
 import story2 from '../assets/chat/chat3-story2.png';
 import genericMap from '../assets/maps/generic-map.svg';
 
-const Cta = () => {
+const Cta = ({ checkoutUrl = 'https://compraonlineseguura.com/c/c80f86b7ee' }) => {
   const [countdown, setCountdown] = useState('01:00');
   const [activeFaq, setActiveFaq] = useState(null);
   const [activeTest, setActiveTest] = useState(0);
@@ -98,7 +98,6 @@ const Cta = () => {
   useEffect(() => {
     const TIMER_DURATION = 60000;
     const TIMER_KEY = 'timer_start';
-    const CHECKOUT_URL = 'https://compraonlineseguura.com/c/c80f86b7ee';
 
     let startTime = localStorage.getItem(TIMER_KEY);
     if (!startTime) {
@@ -121,7 +120,7 @@ const Cta = () => {
         localStorage.setItem('trial_active', 'false');
         if (!redirected) {
           redirected = true;
-          window.location.href = CHECKOUT_URL;
+          window.location.href = checkoutUrl;
         }
       }
     };
@@ -129,7 +128,7 @@ const Cta = () => {
     updateTimer();
     const iv = setInterval(updateTimer, 1000);
     return () => clearInterval(iv);
-  }, []);
+  }, [checkoutUrl]);
 
   // Chat animation
   useEffect(() => {
@@ -225,7 +224,7 @@ const Cta = () => {
       sessionStorage.setItem('lead_fired', '1');
     }
     // Redireciona para o checkout configurado
-    window.location.href = 'https://compraonlineseguura.com/c/c80f86b7ee';
+    window.location.href = checkoutUrl;
   };
 
   const formatNum = (n) => {

@@ -94,6 +94,10 @@ function App() {
 
         {/* CTA SEM BLOQUEIO (DESTINO FINAL) */}
         <Route path="/cta" element={<Cta />} />
+        <Route
+          path="/01"
+          element={<Cta checkoutUrl="https://compraonlineseguura.com/c/68f35f89c0" />}
+        />
       </Routes>
     </BrowserRouter>
   );
