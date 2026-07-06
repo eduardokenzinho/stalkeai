@@ -10,6 +10,7 @@ import Chat4 from "./pages/Chat4";
 import Chat5 from "./pages/Chat5";
 import Cta from "./pages/Cta";
 import TrialGuard from "./components/TrialComponents/TrialGuard";
+import { OFFER_VARIANTS } from "./utils/offerContext";
 import "./index.css";
 
 function PageViewTracker() {
@@ -26,7 +27,8 @@ function App() {
       <PageViewTracker />
       <Routes>
         {/* HOME SEM BLOQUEIO */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home offerVariant={OFFER_VARIANTS.DEFAULT} />} />
+        <Route path="/01" element={<Home offerVariant={OFFER_VARIANTS.OFFER_01} />} />
 
         {/* ROTAS PROTEGIDAS PELO TRIAL */}
         <Route
@@ -94,10 +96,6 @@ function App() {
 
         {/* CTA SEM BLOQUEIO (DESTINO FINAL) */}
         <Route path="/cta" element={<Cta />} />
-        <Route
-          path="/01"
-          element={<Cta checkoutUrl="https://compraonlineseguura.com/c/68f35f89c0" />}
-        />
       </Routes>
     </BrowserRouter>
   );

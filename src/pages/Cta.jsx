@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import s from './Cta.module.css';
+import { getCheckoutUrl } from '../utils/offerContext';
 
 import logoInsta from '../assets/feed/logo-insta.png';
 import av1 from '../assets/feed/av-fallback-1.jpg';
@@ -14,7 +15,8 @@ import story1 from '../assets/chat/chat3-story1.png';
 import story2 from '../assets/chat/chat3-story2.png';
 import genericMap from '../assets/maps/generic-map.svg';
 
-const Cta = ({ checkoutUrl = 'https://compraonlineseguura.com/c/c80f86b7ee' }) => {
+const Cta = () => {
+  const checkoutUrl = getCheckoutUrl();
   const [countdown, setCountdown] = useState('01:00');
   const [activeFaq, setActiveFaq] = useState(null);
   const [activeTest, setActiveTest] = useState(0);
@@ -532,7 +534,7 @@ const Cta = ({ checkoutUrl = 'https://compraonlineseguura.com/c/c80f86b7ee' }) =
             ))}
           </ul>
           <a
-            href="https://compraonlinesegurada.org.ua/c/c80f86b7ee"
+            href={checkoutUrl}
             className={s.ctaButton}
             onClick={handleCtaClick}
           >

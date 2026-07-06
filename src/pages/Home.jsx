@@ -6,8 +6,9 @@ import HeroSection from '../components/HomeComponents/HeroSection';
 import InstagramLogin from '../components/HomeComponents/InstagramLogin';
 import ConfirmModal from '../components/HomeComponents/ConfirmModal';
 import LimitReached from '../components/HomeComponents/LimitReached';
+import { OFFER_VARIANTS, setOfferVariant } from '../utils/offerContext';
 
-const Home = () => {
+const Home = ({ offerVariant = OFFER_VARIANTS.DEFAULT }) => {
   const navigate = useNavigate();
   const [titleText, setTitleText] = useState('');
   const [subtitleText, setSubtitleText] = useState('');
@@ -24,6 +25,10 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showLimitReached, setShowLimitReached] = useState(false);
   const [limitProfile, setLimitProfile] = useState(null);
+
+  useEffect(() => {
+    setOfferVariant(offerVariant);
+  }, [offerVariant]);
 
   useEffect(() => {
     const trialActive = localStorage.getItem('trial_active');
