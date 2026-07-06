@@ -1,18 +1,22 @@
 /* Banner base */
 .trialBanner {
-  position: fixed;
+  position: fixed !important;
   left: 0;
   right: 0;
-  z-index: 900;
+  bottom: 0;
+  z-index: 9999;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 11px 15px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.25);
   pointer-events: auto;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* Posição NO TOPO (abaixo do header) */
 .topPosition {
-  top: 50px; /* altura do header */
+  top: 0;
+  bottom: auto;
   animation: slideDown 0.3s ease-out;
 }
 
@@ -29,7 +33,7 @@
 
 /* Posição EMBAIXO (acima do BottomNav) */
 .bottomPosition {
-  bottom: 52px; /* altura exata do BottomNav */
+  bottom: 0;
   animation: slideUp 0.3s ease-out;
 }
 

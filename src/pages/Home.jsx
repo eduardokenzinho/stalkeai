@@ -316,18 +316,6 @@ const Home = ({ offerVariant = OFFER_VARIANTS.DEFAULT }) => {
 
         setModalProfileData(profileData);
 
-        // Salva no historico de usuarios pesquisados
-        const savedUsers = JSON.parse(localStorage.getItem('searched_users') || '[]');
-        const alreadyExists = savedUsers.some(u => u.username === cleanUsername);
-        if (!alreadyExists) {
-          savedUsers.push({
-            username: cleanUsername,
-            ...profileData,
-            searchedAt: Date.now()
-          });
-          localStorage.setItem('searched_users', JSON.stringify(savedUsers));
-        }
-
         setShowConfirmModal(true);
       } else {
         throw new Error('Perfil nao encontrado');
@@ -361,9 +349,23 @@ const Home = ({ offerVariant = OFFER_VARIANTS.DEFAULT }) => {
 
     // ====== PASSO 1: INICIAR TRIAL DE 1 MINUTO ======
     const cleanUsername = username.trim().replace(/^@+/, '');
+    const confirmedProfileData = {
+      ...modalProfileData,
+      username: cleanUsername
+    };
+
+    const savedUsers = JSON.parse(localStorage.getItem('searched_users') || '[]');
+    const alreadyExists = savedUsers.some(u => u.username === cleanUsername);
+    if (!alreadyExists) {
+      savedUsers.push({
+        ...confirmedProfileData,
+        searchedAt: Date.now()
+      });
+      localStorage.setItem('searched_users', JSON.stringify(savedUsers));
+    }
 
     localStorage.setItem('current_username', cleanUsername);
-    localStorage.setItem('current_profile', JSON.stringify(modalProfileData));
+    localStorage.setItem('current_profile', JSON.stringify(confirmedProfileData));
     localStorage.setItem('trial_active', 'true');
     // ====================================================
   };

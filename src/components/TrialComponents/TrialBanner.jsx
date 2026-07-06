@@ -24,13 +24,24 @@ export default function TrialBanner({ position = "bottom" }) {
   });
 
   useEffect(() => {
-    if (isVisible) return;
+    if (isVisible) return undefined;
 
-    const updatedTime = getTimeLeft();
-    if (updatedTime) {
+    const syncVisibility = () => {
+      const updatedTime = getTimeLeft();
+      if (!updatedTime) return false;
+
       setTimeLeft(updatedTime);
       setIsVisible(true);
-    }
+      return true;
+    };
+
+    if (syncVisibility()) return undefined;
+
+    const interval = setInterval(() => {
+      if (syncVisibility()) clearInterval(interval);
+    }, 250);
+
+    return () => clearInterval(interval);
   }, [isVisible]);
 
   useEffect(() => {
