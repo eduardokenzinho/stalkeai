@@ -42,13 +42,13 @@
 }
 
 .storyRing.closeFriend {
-  background: linear-gradient(45deg, #9ef7b8, #1ed760, #1ed760);
-  box-shadow: 0 0 0 2px rgba(30, 215, 96, 0.2);
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  box-shadow: none;
 }
 
 .storyRing.self {
-  background: linear-gradient(45deg, #1ED760, #16C34A);
-  box-shadow: 0 0 0 2px rgba(30, 215, 96, 0.25);
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  box-shadow: none;
 }
 
 /* AVATAR */

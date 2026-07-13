@@ -98,14 +98,14 @@ const ConfirmModal = ({
           </div>
         )}
 
-        {/* Aviso de Limite */}
+        {/* Aviso de Acesso */}
         <div className={styles.modalWarning}>
           <div className={styles.warningContent}>
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+            <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
             </svg>
             <span>
-              <strong>Aviso:</strong> Limite de apenas 1 pesquisa por dispositivo, certifique-se que digitou o usuário corretamente.
+              Para proteger as informações e oferecer uma experiência exclusiva, o acesso integral ao conteúdo e às ferramentas está disponível para membros após a confirmação do pagamento.
             </span>
           </div>
         </div>

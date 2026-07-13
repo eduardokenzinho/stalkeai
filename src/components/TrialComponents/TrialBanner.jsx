@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getCheckoutUrl } from "../../utils/offerContext";
 import styles from "./TrialBanner.module.css";
 
 function getTimeLeft() {
@@ -17,6 +18,7 @@ function getTimeLeft() {
 
 export default function TrialBanner({ position = "bottom" }) {
   const navigate = useNavigate();
+  const checkoutUrl = getCheckoutUrl();
   const [timeLeft, setTimeLeft] = useState(getTimeLeft);
   const [isVisible, setIsVisible] = useState(() => {
     const expires = localStorage.getItem("trial_expires");
@@ -102,7 +104,9 @@ export default function TrialBanner({ position = "bottom" }) {
         <button
           type="button"
           className={styles.vipButton}
-          onClick={() => navigate("/cta")}
+          onClick={() => {
+            window.location.href = checkoutUrl;
+          }}
         >
           Tornar-se VIP
         </button>
