@@ -254,11 +254,19 @@ export default function Feed() {
   useEffect(() => {
     const trialActive = localStorage.getItem('trial_active') === 'true';
     const trialExpires = localStorage.getItem('trial_expires');
+    const trialStart = localStorage.getItem('trial_start');
 
-    if (trialActive && !trialExpires) {
+    if (trialActive) {
       const now = Date.now();
-      localStorage.setItem('trial_start', now.toString());
-      localStorage.setItem('trial_expires', (now + 60 * 1000).toString());
+      const start = trialStart ? parseInt(trialStart, 10) : now;
+      const expiresAt = start + 30 * 1000;
+      const currentExpires = trialExpires ? parseInt(trialExpires, 10) : null;
+
+      localStorage.setItem('trial_start', start.toString());
+
+      if (!currentExpires || currentExpires > expiresAt) {
+        localStorage.setItem('trial_expires', expiresAt.toString());
+      }
     }
   }, []);
 

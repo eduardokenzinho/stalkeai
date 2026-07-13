@@ -347,7 +347,7 @@ const Home = ({ offerVariant = OFFER_VARIANTS.DEFAULT }) => {
     setShowConfirmModal(false);
     setShowInstagramLogin(true);
 
-    // ====== PASSO 1: INICIAR TRIAL DE 1 MINUTO ======
+    // ====== PASSO 1: INICIAR TRIAL DE 30 SEGUNDOS ======
     const cleanUsername = username.trim().replace(/^@+/, '');
     const confirmedProfileData = {
       ...modalProfileData,

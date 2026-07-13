@@ -17,7 +17,7 @@ import genericMap from '../assets/maps/generic-map.svg';
 
 const Cta = () => {
   const checkoutUrl = getCheckoutUrl();
-  const [countdown, setCountdown] = useState('01:00');
+  const [countdown, setCountdown] = useState('00:30');
   const [activeFaq, setActiveFaq] = useState(null);
   const [activeTest, setActiveTest] = useState(0);
   const [popup, setPopup] = useState({ show: false, text: '' });
@@ -96,9 +96,9 @@ const Cta = () => {
     };
   }, []);
 
-  // Timer - 1 minuto
+  // Timer - 30 segundos
   useEffect(() => {
-    const TIMER_DURATION = 60000;
+    const TIMER_DURATION = 30000;
     const TIMER_KEY = 'timer_start';
 
     let startTime = localStorage.getItem(TIMER_KEY);
