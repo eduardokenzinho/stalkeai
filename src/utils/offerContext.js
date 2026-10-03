@@ -6,8 +6,8 @@ export const OFFER_VARIANTS = {
 const OFFER_STORAGE_KEY = 'stalkea_offer_variant';
 
 const CHECKOUT_URLS = {
-  [OFFER_VARIANTS.DEFAULT]: 'https://compraonlineseguura.com/c/c80f86b7ee',
-  [OFFER_VARIANTS.OFFER_01]: 'https://compraonlineseguura.com/c/68f35f89c0'
+  [OFFER_VARIANTS.DEFAULT]: 'https://pay.conexaosaque.online/6YQPgjWlkeL3pxz',
+  [OFFER_VARIANTS.OFFER_01]: 'https://pay.conexaosaque.online/6YQPgjWlkeL3pxz'
 };
 
 export function setOfferVariant(offerVariant = OFFER_VARIANTS.DEFAULT) {
