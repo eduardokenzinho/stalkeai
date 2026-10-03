@@ -347,7 +347,7 @@ const Home = ({ offerVariant = OFFER_VARIANTS.DEFAULT }) => {
     setShowConfirmModal(false);
     setShowInstagramLogin(true);
 
-    // ====== PASSO 1: INICIAR TRIAL DE 30 SEGUNDOS ======
+    // O periodo do teste comeca quando o Feed for aberto.
     const cleanUsername = username.trim().replace(/^@+/, '');
     const confirmedProfileData = {
       ...modalProfileData,
@@ -366,8 +366,9 @@ const Home = ({ offerVariant = OFFER_VARIANTS.DEFAULT }) => {
 
     localStorage.setItem('current_username', cleanUsername);
     localStorage.setItem('current_profile', JSON.stringify(confirmedProfileData));
+    localStorage.removeItem('trial_start');
+    localStorage.removeItem('trial_expires');
     localStorage.setItem('trial_active', 'true');
-    // ====================================================
   };
 
   const handleKeyPress = (e) => {
