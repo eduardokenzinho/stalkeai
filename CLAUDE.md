@@ -17,7 +17,7 @@
 - **Estilização:** CSS Modules
 - **Ícones:** FontAwesome 7
 - **Deploy:** Vercel
-- **Node:** 20.x
+- **Node:** 24.x
 
 ## APIs Externas
 - `ipapi.co/json/` — geolocalização por IP

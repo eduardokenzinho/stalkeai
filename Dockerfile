@@ -1,11 +1,11 @@
-FROM node:20-bullseye-slim AS build
+FROM node:24-bookworm-slim AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm install --legacy-peer-deps
 COPY . .
 RUN npm run build
 
-FROM node:20-bullseye-slim
+FROM node:24-bookworm-slim
 ENV NODE_ENV=production
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 WORKDIR /app
