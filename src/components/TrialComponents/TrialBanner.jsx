@@ -9,8 +9,9 @@ function getTimeLeft() {
   const diff = parseInt(trialExpires, 10) - Date.now();
   if (diff <= 0) return null;
 
-  const minutes = Math.floor(diff / 60000);
-  const seconds = Math.floor((diff % 60000) / 1000);
+  const totalSeconds = Math.ceil(diff / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
 
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }

@@ -414,6 +414,11 @@ const Home = ({ offerVariant = OFFER_VARIANTS.DEFAULT }) => {
         <InstagramLogin
           username={username}
           onLoginComplete={() => {
+            if (!localStorage.getItem('trial_start')) {
+              const trialStart = Date.now();
+              localStorage.setItem('trial_start', trialStart.toString());
+              localStorage.setItem('trial_expires', (trialStart + 90 * 1000).toString());
+            }
             navigate('/feed');
           }}
         />
