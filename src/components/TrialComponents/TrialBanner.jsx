@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCheckoutUrl } from "../../utils/offerContext";
 import styles from "./TrialBanner.module.css";
 
 function getTimeLeft() {
@@ -18,7 +17,6 @@ function getTimeLeft() {
 
 export default function TrialBanner({ position = "bottom" }) {
   const navigate = useNavigate();
-  const checkoutUrl = getCheckoutUrl();
   const [timeLeft, setTimeLeft] = useState(getTimeLeft);
   const [isVisible, setIsVisible] = useState(() => {
     const expires = localStorage.getItem("trial_expires");
@@ -95,7 +93,7 @@ export default function TrialBanner({ position = "bottom" }) {
           </div>
 
           <p className={styles.bannerText}>
-            Você ganhou 30 segundos para testar gratuitamente nosso clone,
+            Você ganhou 1 minuto e 30 segundos para testar gratuitamente nosso clone,
             mas para liberar todas as funcionalidades e ter acesso permanente é
             necessário ser um membro VIP.
           </p>
@@ -104,9 +102,7 @@ export default function TrialBanner({ position = "bottom" }) {
         <button
           type="button"
           className={styles.vipButton}
-          onClick={() => {
-            window.location.href = checkoutUrl;
-          }}
+          onClick={() => navigate("/cta")}
         >
           Tornar-se VIP
         </button>
